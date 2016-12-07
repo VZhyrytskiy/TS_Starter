@@ -1,25 +1,33 @@
 var gulp = require('gulp');
+var plug = require("gulp-load-plugins")();
+
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var tsify = require('tsify');
-var sourcemaps = require('gulp-sourcemaps');
-var uglify = require('gulp-uglify');
 var buffer = require('vinyl-buffer');
+
 var paths = {
-    pages: ['src/*.html']
+    pages: ['src/*.html'],
+    localhost: "http://localhost:8000/index.html",
+    tssource: ["src/**/*.ts"]
 };
-var tssource = ["src/**/*.ts"];
 
 gulp.task('copyHtml', function () {
     return gulp.src(paths.pages)
         .pipe(gulp.dest('app'));
 });
 
-gulp.task('default', ['watch', 'copyHtml', 'bundle']);
+gulp.task('webserver', function() {
+    return gulp.src('app')
+        .pipe(plug.webserver({
+            livereload: true,
+            directoryListing: true,
+            open: paths.localhost
+        }));
+});
 
-// watch
 gulp.task("watch", function() {
-    gulp.watch(tssource, ["bundle"]);
+    gulp.watch(paths.tssource, ["bundle"]);
 });
 
 gulp.task('bundle', function() {
@@ -38,8 +46,10 @@ gulp.task('bundle', function() {
     .bundle()
     .pipe(source('bundle.js'))
     .pipe(buffer())
-    .pipe(sourcemaps.init({loadMaps: true}))
-    .pipe(uglify())
-    .pipe(sourcemaps.write('./'))
+    .pipe(plug.sourcemaps.init({loadMaps: true}))
+    .pipe(plug.uglify())
+    .pipe(plug.sourcemaps.write('./'))
     .pipe(gulp.dest('app'));
 });
+
+gulp.task('default', ['watch', 'copyHtml', 'bundle', 'webserver']);
