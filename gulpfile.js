@@ -9,7 +9,8 @@ var buffer = require('vinyl-buffer');
 var paths = {
     pages: ['src/*.html'],
     localhost: "http://localhost:8000/index.html",
-    tssource: ["src/**/*.ts"]
+    tssource: ["src/**/*.ts"],
+    htmlsource: ["src/**/*.html"]
 };
 
 gulp.task('copyHtml', function () {
@@ -24,10 +25,6 @@ gulp.task('webserver', function() {
             directoryListing: true,
             open: paths.localhost
         }));
-});
-
-gulp.task("watch", function() {
-    gulp.watch(paths.tssource, ["bundle"]);
 });
 
 gulp.task('bundle', function() {
@@ -50,6 +47,11 @@ gulp.task('bundle', function() {
     .pipe(plug.uglify())
     .pipe(plug.sourcemaps.write('./'))
     .pipe(gulp.dest('app'));
+});
+
+gulp.task("watch", function() {
+    gulp.watch(paths.tssource, ["bundle"]);
+    gulp.watch(paths.htmlsource, ["copyHtml"]);
 });
 
 gulp.task('default', ['watch', 'copyHtml', 'bundle', 'webserver']);
