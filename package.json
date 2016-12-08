@@ -5,8 +5,9 @@
   "main": "./dist/app.js",
   "scripts": {
     "gulp": "gulp",
+    "gulp:webserver": "gulp webserver",
     "prestart": "npm install",
-    "start": "npm run gulp"
+    "start": "npm-run-all --parallel gulp"
   },
   "author": "Vitaliy Zhyrytskyy",
   "license": "ISC",
@@ -27,6 +28,7 @@
     "gulp-uglify": "^1.5.4",
     "gulp-util": "^3.0.7",
     "gulp-webserver": "^0.9.1",
+    "npm-run-all": "^3.1.2",
     "postcss": "^5.0.13",
     "postcss-scss": "^0.1.3",
     "precss": "^1.3.0",
