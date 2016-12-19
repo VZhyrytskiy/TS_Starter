@@ -86,6 +86,31 @@ function сheckoutBooks(customer: string, ...bookIDs: number[]): string[] {
     return booksCheckedOut;
 }
 
+function getTitles(author: string): string[];
+function getTitles(available: boolean): string[];
+function getTitles(bookProperty: any): string[] {
+    const allBooks = getAllBooks();
+    const foundTitles: string[] = [];
+    
+    if(typeof bookProperty == 'string') {
+        // get all books by a particular author
+        for(let book of allBooks) {
+            if(book.author === bookProperty) {
+                foundTitles.push(book.title);
+            }
+        }
+    }
+    else if(typeof bookProperty == 'boolean') {
+        // get all books based on specified availability
+        for(let book of allBooks) {
+            if(book.available === bookProperty) {
+                foundTitles.push(book.title);
+            }
+        }
+    }
+    return foundTitles;
+}
+
 // ---------------------------------------------
 console.log(getAllBooks());
 
@@ -114,3 +139,6 @@ createCustomer('Clara', 12, 'Atlanta');
 
 let myBooks: string[] = сheckoutBooks('Ann', 1, 3, 4);
 myBooks.forEach(title => console.log(title));
+
+let checkedOutBooks = getTitles(false);
+checkedOutBooks.forEach(title => console.log(title));
