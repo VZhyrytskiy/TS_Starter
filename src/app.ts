@@ -55,6 +55,10 @@ function getBookByID(id: number) {
     return allBooks.find(book => book.id === id);
 }
 
+function createCustomerID(name: string, id: number): string {
+    return `${name}${id}`;
+}
+
 // ---------------------------------------------
 console.log(getAllBooks());
 
@@ -64,3 +68,13 @@ logFirstAvailable(allBooks);
 const javaScriptBooks = getBookTitlesByCategory(Category.JavaScript);
 // logBookTitles(javaScriptBooks);
 javaScriptBooks.forEach((val, idx, arr) => console.log(++idx + ' - ' + val));
+
+let myID = createCustomerID('Ann', 10);
+console.log(myID);
+
+// the names of parameters are not important 
+let IdGenerator: (chars: string, num: number) => string;
+IdGenerator = (name: string, id: number) => `${name}${id}`;
+IdGenerator = createCustomerID;
+myID = IdGenerator('Ann', 20);
+console.log(myID);
