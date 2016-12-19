@@ -13,7 +13,7 @@ function getAllBooks() {
     return books;
 }
 
-function logFirstAvailable(books): void {
+function logFirstAvailable(books = getAllBooks()): void {
     
     let numberOfBooks: number = books.length;
     let firstAvailable: string = '';
@@ -29,7 +29,7 @@ function logFirstAvailable(books): void {
     console.log(`First Available: ${firstAvailable}`);
 }
 
-function getBookTitlesByCategory(categoryFilter: Category): Array<string> {
+function getBookTitlesByCategory(categoryFilter: Category = Category.JavaScript): Array<string> {
     console.log(`Getting books in category: ${Category[categoryFilter]}`);
     
     const allBooks = getAllBooks();
@@ -59,13 +59,42 @@ function createCustomerID(name: string, id: number): string {
     return `${name}${id}`;
 }
 
+function createCustomer(name: string, age?: number, city?: string): void {
+    console.log(`Creating customer ${name}`);
+    
+    if(age) {
+        console.log(`Age: ${age}`);
+    }
+    
+    if(city) {
+        console.log(`City: ${city}`);
+    }
+}
+
+function сheckoutBooks(customer: string, ...bookIDs: number[]): string[] {
+    console.log(`Checking out books for ${customer}`);
+    
+    let booksCheckedOut: string[] = [];
+    
+    for(let id of bookIDs) {
+        let book = getBookByID(id);
+        if (book && book.available) {
+            booksCheckedOut.push(book.title);
+        }
+    }
+    
+    return booksCheckedOut;
+}
+
 // ---------------------------------------------
 console.log(getAllBooks());
 
 const allBooks = getAllBooks();
-logFirstAvailable(allBooks);
+// logFirstAvailable(allBooks);
+logFirstAvailable();
 
-const javaScriptBooks = getBookTitlesByCategory(Category.JavaScript);
+// const javaScriptBooks = getBookTitlesByCategory(Category.JavaScript);
+const javaScriptBooks = getBookTitlesByCategory();
 // logBookTitles(javaScriptBooks);
 javaScriptBooks.forEach((val, idx, arr) => console.log(++idx + ' - ' + val));
 
@@ -78,3 +107,10 @@ IdGenerator = (name: string, id: number) => `${name}${id}`;
 IdGenerator = createCustomerID;
 myID = IdGenerator('Ann', 20);
 console.log(myID);
+
+createCustomer('Ann');
+createCustomer('Boris', 6);
+createCustomer('Clara', 12, 'Atlanta');
+
+let myBooks: string[] = сheckoutBooks('Ann', 1, 3, 4);
+myBooks.forEach(title => console.log(title));
