@@ -1,7 +1,17 @@
 
 enum Category { JavaScript, CSS, HTML, TypeScript, Angular2 };
 
-function getAllBooks() {
+interface Book {
+    id: number;
+    title: string;
+    author: string;
+    available: boolean;
+    category: Category;
+    pages?: number;
+    markDamaged?: (reason: string) => void;
+}
+
+function getAllBooks(): Book[] {
     
     let books =[
         { id: 1, title: 'Refactoring JavaScript', author: 'Evan Burchard', available: true, category: Category.JavaScript },
@@ -50,7 +60,7 @@ function logBookTitles(titles: string[]): void {
     }
 }
 
-function getBookByID(id: number) {
+function getBookByID(id: number): Book | undefined {
     const allBooks = getAllBooks();
     return allBooks.find(book => book.id === id);
 }
@@ -111,6 +121,10 @@ function getTitles(bookProperty: any): string[] {
     return foundTitles;
 }
 
+function PrintBook(book: Book): void {
+    console.log(`${book.title} by ${book.author}`);
+}
+
 // ---------------------------------------------
 console.log(getAllBooks());
 
@@ -142,3 +156,15 @@ myBooks.forEach(title => console.log(title));
 
 let checkedOutBooks = getTitles(false);
 checkedOutBooks.forEach(title => console.log(title));
+
+let myBook: Book = {
+    id: 5,
+    title: 'Colors, Backgrounds, and Gradients',
+    author: 'Eric A. Meyer',
+    available: true,
+    category: Category.CSS,
+    pages: 200,
+    markDamaged: (reason: string) => console.log(`Damaged: ${reason}`)
+};
+PrintBook(myBook);
+myBook.markDamaged('missing back cover');
