@@ -8,7 +8,11 @@ interface Book {
     available: boolean;
     category: Category;
     pages?: number;
-    markDamaged?: (reason: string) => void;
+    markDamaged?: DamageLogger;
+}
+
+interface DamageLogger {
+    (reason: string): void;
 }
 
 function getAllBooks(): Book[] {
@@ -168,3 +172,7 @@ let myBook: Book = {
 };
 PrintBook(myBook);
 myBook.markDamaged('missing back cover');
+
+let logDamage: DamageLogger;
+logDamage = (damage: string) => console.log('Damage reported: ' + damage);
+logDamage('coffee stains');
