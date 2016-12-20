@@ -143,6 +143,17 @@ function PrintBook(book: Book): void {
     console.log(`${book.title} by ${book.author}`);
 }
 
+class UniversityLibrarian implements Librarian {
+    
+    name: string;
+    email: string;
+    department: string;
+    
+    assistCustomer(custName: string): void {
+        console.log(`${this.name} is assisting ${custName}`);
+    }
+}
+
 // ---------------------------------------------
 console.log(getAllBooks());
 
@@ -197,9 +208,12 @@ let favoriteAuthor: Author = {
     numBooksPublished: 3
 };
 
-let favoriteLibrarian: Librarian = {
-    name: 'Boris',
-    email: 'Boris@gmail.com',
-    department: 'Classical Literature',
-    assistCustomer: (name: string) => console.log(`Assist ${name}`)
-};
+// let favoriteLibrarian: Librarian = {
+//     name: 'Boris',
+//     email: 'Boris@gmail.com',
+//     department: 'Classical Literature',
+//     assistCustomer: (name: string) => console.log(`Assist ${name}`)
+// };
+let favoriteLibrarian: Librarian = new UniversityLibrarian();
+favoriteLibrarian.name = 'Anna';
+favoriteLibrarian.assistCustomer('Boris');
