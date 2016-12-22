@@ -154,7 +154,7 @@ class UniversityLibrarian implements Librarian {
     }
 }
 
-class ReferenceItem {
+abstract class ReferenceItem {
     // title: string;
     // year: number;
     private _publisher: string;
@@ -181,7 +181,9 @@ class ReferenceItem {
     
     set publisher(newPublisher: string) {
         this._publisher = newPublisher;
-    }   
+    }  
+
+    abstract printCitation(): void; 
 }
 
 class Encyclopedia extends ReferenceItem {
@@ -193,7 +195,11 @@ class Encyclopedia extends ReferenceItem {
     printItem(): void {
         super.printItem();
         console.log(`Edition: ${this.edition} (${this.year})`);
-    }    
+    } 
+
+    printCitation(): void {
+        console.log(`${this.title} - ${this.year}`);
+    }   
 }
 
 // ---------------------------------------------
@@ -260,10 +266,10 @@ let favoriteLibrarian: Librarian = new UniversityLibrarian();
 favoriteLibrarian.name = 'Anna';
 favoriteLibrarian.assistCustomer('Boris');
 
-let ref: ReferenceItem = new ReferenceItem('Updated Facts and Figures', 2016);
-ref.printItem();
-ref.publisher = 'Random Data Publishing';
-console.log(ref.publisher);
+// let ref: ReferenceItem = new ReferenceItem('Updated Facts and Figures', 2016);
+// ref.printItem();
+// ref.publisher = 'Random Data Publishing';
+// console.log(ref.publisher);
 
 let refBook: ReferenceItem = new Encyclopedia('WorldPedia', 1900, 10);
 refBook.printItem();
