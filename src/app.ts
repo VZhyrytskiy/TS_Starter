@@ -166,7 +166,7 @@ class ReferenceItem {
     //     this.year = newYear;
     // }
 
-    constructor(public title: string, private year: number) {
+    constructor(public title: string, protected year: number) {
         console.log('Creating a new ReferenceItem...');
     }
 
@@ -181,8 +181,19 @@ class ReferenceItem {
     
     set publisher(newPublisher: string) {
         this._publisher = newPublisher;
-    }
+    }   
+}
+
+class Encyclopedia extends ReferenceItem {
     
+    constructor(newTitle: string, newYear: number, public edition: number) {
+        super(newTitle, newYear);
+    }
+
+    printItem(): void {
+        super.printItem();
+        console.log(`Edition: ${this.edition} (${this.year})`);
+    }    
 }
 
 // ---------------------------------------------
@@ -253,3 +264,6 @@ let ref: ReferenceItem = new ReferenceItem('Updated Facts and Figures', 2016);
 ref.printItem();
 ref.publisher = 'Random Data Publishing';
 console.log(ref.publisher);
+
+let refBook: ReferenceItem = new Encyclopedia('WorldPedia', 1900, 10);
+refBook.printItem();
