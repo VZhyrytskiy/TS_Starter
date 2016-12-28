@@ -1,33 +1,6 @@
-
-enum Category { JavaScript, CSS, HTML, TypeScript, Angular2 };
-
-interface Book {
-    id: number;
-    title: string;
-    author: string;
-    available: boolean;
-    category: Category;
-    pages?: number;
-    markDamaged?: DamageLogger;
-}
-
-interface DamageLogger {
-    (reason: string): void;
-}
-
-interface Person {
-    name: string;
-    email: string;
-}
-
-interface Author extends Person {
-    numBooksPublished: number;
-}
-
-interface Librarian extends Person {
-    department: string;
-    assistCustomer: (custName: string) => void;
-}
+import { Category } from './enums';
+import { Book, Logger, Author, Librarian } from './interfaces';
+import { UniversityLibrarian, ReferenceItem } from './classes';
 
 function getAllBooks(): Book[] {
     
@@ -143,49 +116,6 @@ function PrintBook(book: Book): void {
     console.log(`${book.title} by ${book.author}`);
 }
 
-class UniversityLibrarian implements Librarian {
-    
-    name: string;
-    email: string;
-    department: string;
-    
-    assistCustomer(custName: string): void {
-        console.log(`${this.name} is assisting ${custName}`);
-    }
-}
-
-abstract class ReferenceItem {
-    // title: string;
-    // year: number;
-    private _publisher: string;
-    static department: string = 'Research';
-
-    // constructor(newTitle: string, newYear: number) {
-    //     console.log('Creating a new ReferenceItem...');
-    //     this.title = newTitle;
-    //     this.year = newYear;
-    // }
-
-    constructor(public title: string, protected year: number) {
-        console.log('Creating a new ReferenceItem...');
-    }
-
-    printItem(): void {
-        console.log(`${this.title} was published in ${this.year}.`);
-        console.log(`Department: ${ReferenceItem.department}`);
-    }
-
-    get publisher(): string {
-        return this._publisher.toUpperCase();
-    }
-    
-    set publisher(newPublisher: string) {
-        this._publisher = newPublisher;
-    }  
-
-    abstract printCitation(): void; 
-}
-
 class Encyclopedia extends ReferenceItem {
     
     constructor(newTitle: string, newYear: number, public edition: number) {
@@ -201,6 +131,7 @@ class Encyclopedia extends ReferenceItem {
         console.log(`${this.title} - ${this.year}`);
     }   
 }
+
 
 // ---------------------------------------------
 console.log(getAllBooks());
