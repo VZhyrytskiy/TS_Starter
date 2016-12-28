@@ -177,7 +177,7 @@ let myBook: Book = {
 PrintBook(myBook);
 myBook.markDamaged('missing back cover');
 
-let logDamage: DamageLogger;
+let logDamage: Logger;
 logDamage = (damage: string) => console.log('Damage reported: ' + damage);
 logDamage('coffee stains');
 
