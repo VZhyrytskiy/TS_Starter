@@ -1,6 +1,7 @@
 import { Category } from './enums';
 import { Book, Logger, Author, Librarian } from './interfaces';
 import { UniversityLibrarian, ReferenceItem } from './classes';
+import { purge } from './lib/utility-functions';
 import RefBook from './encyclopedia';
 
 function getAllBooks(): Book[] {
@@ -189,3 +190,15 @@ favoriteLibrarian.assistCustomer('Boris');
 
 let refBook: ReferenceItem = new RefBook('WorldPedia', 1900, 10);
 refBook.printItem();
+
+let inventory: Array<Book> = [
+    { id: 10, title: 'The C Programming Language', author: 'K & R', available: true, category: Category.Software },
+    { id: 11, title: 'Code Complete', author: 'Steve McConnell', available: true, category: Category.Software },
+    { id: 12, title: '8-Bit Graphics with Cobol', author: 'A. B.', available: true, category: Category.Software },
+    { id: 13, title: 'Cool autoexec.bat Scripts!', author: 'C. D.', available: true, category: Category.Software }
+];
+let purgedBooks: Array<Book> = purge<Book>(inventory);
+purgedBooks.forEach(book => console.log(book.title));
+
+let purgedNums: Array<number> = purge<number>([1, 2, 3, 4]);
+console.log(purgedNums);
