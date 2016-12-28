@@ -1,6 +1,7 @@
 import { Category } from './enums';
 import { Book, Logger, Author, Librarian } from './interfaces';
 import { UniversityLibrarian, ReferenceItem } from './classes';
+import RefBook from './encyclopedia';
 
 function getAllBooks(): Book[] {
     
@@ -116,22 +117,6 @@ function PrintBook(book: Book): void {
     console.log(`${book.title} by ${book.author}`);
 }
 
-class Encyclopedia extends ReferenceItem {
-    
-    constructor(newTitle: string, newYear: number, public edition: number) {
-        super(newTitle, newYear);
-    }
-
-    printItem(): void {
-        super.printItem();
-        console.log(`Edition: ${this.edition} (${this.year})`);
-    } 
-
-    printCitation(): void {
-        console.log(`${this.title} - ${this.year}`);
-    }   
-}
-
 
 // ---------------------------------------------
 console.log(getAllBooks());
@@ -202,5 +187,5 @@ favoriteLibrarian.assistCustomer('Boris');
 // ref.publisher = 'Random Data Publishing';
 // console.log(ref.publisher);
 
-let refBook: ReferenceItem = new Encyclopedia('WorldPedia', 1900, 10);
+let refBook: ReferenceItem = new RefBook('WorldPedia', 1900, 10);
 refBook.printItem();
