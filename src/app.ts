@@ -222,4 +222,14 @@ magazineShelf.printTitles();
 let softwareBook = bookShelf.find('Code Complete');
 console.log(`${softwareBook.title} (${softwareBook.author})`);
 
+let lib1 = new UniversityLibrarian();
 
+try {
+    lib1.assistFaculty = () => console.log('assistFaculty replacement method');
+    lib1.teachCommunity = () => console.log('teachCommunity replacement method');    
+} catch (error) {
+    console.log(error.message);
+}
+
+lib1.assistFaculty();
+lib1.teachCommunity();

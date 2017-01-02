@@ -15,3 +15,12 @@ export function logger<TFunction extends Function>(target: TFunction): TFunction
     newConstructor.prototype.constructor = target;
     return <TFunction>newConstructor;
 }
+
+export function writable(isWritable: boolean) {
+    return function(target: Object,
+                    propertyKey: string,
+                    descriptor: PropertyDescriptor) {
+        console.log(`Setting ${propertyKey}.`);
+        descriptor.writable = isWritable;
+    }
+}
