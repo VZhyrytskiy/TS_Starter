@@ -54,7 +54,7 @@ export function logBookTitles(titles: string[]): void {
     }
 }
 
-export function getBookByID(id: number): Book | undefined {
+export function getBookByID(id: number): Book {
     const allBooks = getAllBooks();
     return allBooks.find(book => book.id === id);
 }

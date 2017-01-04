@@ -1,3 +1,4 @@
+import "babel-polyfill";
 import { Category } from './enums';
 import { Book, Logger, Author, Librarian, Magazine } from './interfaces';
 import { UniversityLibrarian, ReferenceItem } from './classes';
@@ -144,5 +145,5 @@ lib1.teachCommunity();
 // async/await
 console.log('Beginning search...');
 logSearchResults(Category.JavaScript)
-    // .catch(reason => console.log(reason));
+    .catch(reason => console.log(reason));
 console.log('Search submitted...');
