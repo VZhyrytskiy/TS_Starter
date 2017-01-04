@@ -3,7 +3,8 @@ import { Book, Logger, Author, Librarian, Magazine } from './interfaces';
 import { UniversityLibrarian, ReferenceItem } from './classes';
 import { purge, getAllBooks, getBookTitlesByCategory, logFirstAvailable,
     logBookTitles, getBookByID, createCustomerID, createCustomer, сheckoutBooks,
-  getTitles, PrintBook, getBooksByCategory, logCategorySearch } from './lib/utility-functions';
+  getTitles, PrintBook, getBooksByCategory, logCategorySearch,
+  getBooksByCategoryPromise } from './lib/utility-functions';
 import RefBook from './encyclopedia';
 import Shelf from './shelf';
 
@@ -126,4 +127,16 @@ lib1.teachCommunity();
 console.log('Beginning search...');
 getBooksByCategory(Category.JavaScript, logCategorySearch);
 getBooksByCategory(Category.Software, logCategorySearch);
+console.log('Search submitted...');
+
+// Promises
+console.log('Beginning search...');
+getBooksByCategoryPromise(Category.Angular2)
+    .then(titles => {
+        console.log(`Found titles: ${titles}`);
+        throw 'something bad happened';
+        // return titles.length;
+    }, reason => { return 0; })
+    .then(numOfBooks => console.log(`Number of books found: ${numOfBooks}`))
+    .catch(reason => console.log(`Error: ${reason}`));
 console.log('Search submitted...');

@@ -151,3 +151,22 @@ export function logCategorySearch(err: Error, titles: string[]): void {
         console.log(titles);
     }    
 }
+
+export function getBooksByCategoryPromise(cat: Category): Promise<string[]> {
+
+    let p: Promise<string[]> = new Promise((resolve, reject) => {
+
+        setTimeout(() => {
+            let foundBooks: string[] = getBookTitlesByCategory(cat);
+
+            if(foundBooks.length > 0) {
+                resolve(foundBooks);
+            }
+            else {
+                reject('No books found for that category.');
+            }
+        }, 2000);
+    });
+
+    return p;
+}
