@@ -41,6 +41,10 @@ gulp.task('bundle', function() {
         extensions: ['.ts']
     })
     .bundle()
+    .on('error', function(err){
+        console.log('Compile Error', err.stack, err.message);
+        this.emit('end');
+    })
     .pipe(source('bundle.js'))
     .pipe(buffer())
     .pipe(plug.sourcemaps.init({loadMaps: true}))
