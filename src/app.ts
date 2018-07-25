@@ -281,14 +281,19 @@ logFirstAvailable();
 // enc.printItem();
 
 // Task 21.1
-let lib1 = new UniversityLibrarian();
+// let lib1 = new UniversityLibrarian();
 
-try {
-  lib1.assistFaculty = () => console.log('assistFaculty replacement method');
-  lib1.teachCommunity = () => console.log('teachCommunity replacement method');
-} catch (error) {
-  console.log(error.message);
-}
+// try {
+//   lib1.assistFaculty = () => console.log('assistFaculty replacement method');
+//   lib1.teachCommunity = () => console.log('teachCommunity replacement method');
+// } catch (error) {
+//   console.log(error.message);
+// }
 
-lib1.assistFaculty();
-lib1.teachCommunity();
+// lib1.assistFaculty();
+// lib1.teachCommunity();
+
+// Task 21-param-decorator
+// const l = new UniversityLibrarian();
+// l.name = 'Ann';
+// l.assistCustomer('Boris');

@@ -55,3 +55,48 @@ export function writable(isWritable: boolean) {
     descriptor.writable = isWritable;
   };
 }
+
+export function logParameter(
+  target: Object,
+  methodName: string,
+  index: number
+) {
+  console.log(target);
+  console.log(methodName);
+  console.log(index);
+
+  const key = `${methodName}_decor_params_indexes`;
+
+  if (Array.isArray(target[key])) {
+    target[key].push(index);
+  } else {
+    target[key] = [index];
+  }
+}
+
+export function logMethod(
+  target: Object,
+  methodName: string,
+  descriptor: PropertyDescriptor
+) {
+  const originalMethod = descriptor.value;
+
+  descriptor.value = function(...args) {
+    const indexes = target[`${methodName}_decor_params_indexes`];
+    if (Array.isArray(indexes)) {
+      args.forEach((arg, index) => {
+        if (indexes.indexOf(index) !== -1) {
+          const arg = args[index];
+          console.log(
+            `Method: ${methodName}, ParamIndex: ${index}, ParamValue: ${arg}`
+          );
+        }
+      });
+    }
+    console.log(`this: `, this);
+    const result = originalMethod.apply(this, args);
+    return result;
+  };
+
+  return descriptor;
+}
