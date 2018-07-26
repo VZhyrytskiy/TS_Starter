@@ -301,7 +301,12 @@ logFirstAvailable();
 // l.assistCustomer('Boris');
 
 // Task 21.2-prop-decorator
-const l = new UniversityLibrarian();
-l.name = 'Ann';
-console.log(l);
-console.log(l.name);
+// const l = new UniversityLibrarian();
+// l.name = 'Ann';
+// console.log(l);
+// console.log(l.name);
+
+// Task 26
+const e = new Encyclopedia('title', 2018, 3);
+e.copies = 13;
+console.log(e.copies);
