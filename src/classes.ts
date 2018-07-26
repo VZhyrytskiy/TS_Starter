@@ -5,12 +5,14 @@ import {
   writable,
   timeout,
   logParameter,
-  logMethod
+  logMethod,
+  format,
 } from './decorators';
 
 @logger
 @sealed('UniversityLibrarian')
 class UniversityLibrarian implements Interfaces.Librarian {
+  @format()
   name: string;
   email: string;
   department: string;

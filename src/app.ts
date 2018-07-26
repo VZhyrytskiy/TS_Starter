@@ -296,4 +296,12 @@ logFirstAvailable();
 // Task 21-param-decorator
 // const l = new UniversityLibrarian();
 // l.name = 'Ann';
+// console.log(l);
+// console.log(l.name);
 // l.assistCustomer('Boris');
+
+// Task 21.2-prop-decorator
+const l = new UniversityLibrarian();
+l.name = 'Ann';
+console.log(l);
+console.log(l.name);
