@@ -1,20 +1,31 @@
 import { Category } from './enums';
 import { Book, Logger, Author, Librarian, Magazine } from './interfaces';
-import { UniversityLibrarian, ReferenceItem } from './classes';
-import { purge, getAllBooks, getBookTitlesByCategory, logFirstAvailable,
-    logBookTitles, getBookByID, createCustomerID, createCustomer, сheckoutBooks,
-  getTitles, PrintBook, getBooksByCategory, logCategorySearch,
-  getBooksByCategoryPromise } from './lib/utility-functions';
-import RefBook from './encyclopedia';
-import Shelf from './shelf';
-import Encyclopedia from './encyclopedia';
+import { ReferenceItem, UniversityLibrarian, Shelf } from './classes';
+import RefBook from './classes/encyclopedia';
+import Encyclopedia from './classes/encyclopedia';
+import {
+  purge,
+  getAllBooks,
+  getBookTitlesByCategory,
+  logFirstAvailable,
+  logBookTitles,
+  getBookByID,
+  createCustomerID,
+  createCustomer,
+  сheckoutBooks,
+  getTitles,
+  PrintBook,
+  getBooksByCategory,
+  logCategorySearch,
+  getBooksByCategoryPromise
+} from './lib/utility-functions';
 
 // ---------------------------------------------
 // console.log(getAllBooks());
 
 // const allBooks = getAllBooks();
 // logFirstAvailable(allBooks);
-logFirstAvailable();
+// logFirstAvailable();
 
 // const javaScriptBooks = getBookTitlesByCategory(Category.JavaScript);
 // const javaScriptBooks = getBookTitlesByCategory();
@@ -81,6 +92,7 @@ logFirstAvailable();
 // let refBook: ReferenceItem = new RefBook('WorldPedia', 1900, 10);
 // refBook.printItem();
 
+// Task 18
 // let inventory: Array<Book> = [
 //   {
 //     id: 10,
@@ -172,6 +184,10 @@ logFirstAvailable();
 // console.log(l);
 // console.log(l.name);
 
+// Task 24
+// const enc = new Encyclopedia('Title', 2018, 3);
+// enc.printItem();
+
 // Task 26
 const e = new Encyclopedia('title', 2018, 3);
 e.copies = 13;
@@ -186,11 +202,16 @@ console.log('Search submitted...');
 // Promises
 console.log('Beginning search...');
 getBooksByCategoryPromise(Category.Angular2)
-    .then(titles => {
-        console.log(`Found titles: ${titles}`);
-        throw 'something bad happened';
-        // return titles.length;
-    }, reason => { return 0; })
-    .then(numOfBooks => console.log(`Number of books found: ${numOfBooks}`))
-    .catch(reason => console.log(`Error: ${reason}`));
+  .then(
+    titles => {
+      console.log(`Found titles: ${titles}`);
+      throw 'something bad happened';
+      // return titles.length;
+    },
+    reason => {
+      return 0;
+    }
+  )
+  .then(numOfBooks => console.log(`Number of books found: ${numOfBooks}`))
+  .catch(reason => console.log(`Error: ${reason}`));
 console.log('Search submitted...');
