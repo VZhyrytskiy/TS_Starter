@@ -1,10 +1,8 @@
 import { Category } from './enums';
 import { Book, Logger, Author, Librarian, Magazine } from './interfaces';
-import { UniversityLibrarian, ReferenceItem } from './classes';
+import { ReferenceItem, UniversityLibrarian, Shelf } from './classes';
+import RefBook from './classes/encyclopedia';
 import { purge } from './lib/utility-functions';
-import RefBook from './encyclopedia';
-import Shelf from './shelf';
-import Encyclopedia from './encyclopedia';
 
 function getAllBooks(): Book[] {
   let books = [
@@ -215,6 +213,7 @@ logFirstAvailable();
 // let refBook: ReferenceItem = new RefBook('WorldPedia', 1900, 10);
 // refBook.printItem();
 
+// Task 18
 // let inventory: Array<Book> = [
 //   {
 //     id: 10,
