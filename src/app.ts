@@ -3,6 +3,7 @@ import { Book, Logger, Author, Librarian, Magazine } from './interfaces';
 import { ReferenceItem, UniversityLibrarian, Shelf } from './classes';
 import RefBook from './classes/encyclopedia';
 import { purge } from './lib/utility-functions';
+import Encyclopedia from './classes/encyclopedia';
 
 function getAllBooks(): Book[] {
   let books = [
@@ -291,3 +292,8 @@ try {
 
 lib1.assistFaculty();
 lib1.teachCommunity();
+
+// Task 24
+const enc = new Encyclopedia('Title', 2018, 3);
+enc.printItem();
+
