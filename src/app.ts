@@ -1,9 +1,8 @@
 import { Category } from './enums';
 import { Book, Logger, Author, Librarian, Magazine } from './interfaces';
-import { UniversityLibrarian, ReferenceItem } from './classes';
+import { ReferenceItem, UniversityLibrarian, Shelf } from './classes';
+import RefBook from './classes/encyclopedia';
 import { purge } from './lib/utility-functions';
-import RefBook from './encyclopedia';
-import Shelf from './shelf';
 
 function getAllBooks(): Book[] {
   let books = [
@@ -214,6 +213,7 @@ logFirstAvailable();
 // let refBook: ReferenceItem = new RefBook('WorldPedia', 1900, 10);
 // refBook.printItem();
 
+// Task 18
 // let inventory: Array<Book> = [
 //   {
 //     id: 10,
@@ -269,8 +269,8 @@ logFirstAvailable();
 // console.log(`${softwareBook.title} (${softwareBook.author})`);
 
 // Task 20.2
-let fLibrarian = new UniversityLibrarian();
-fLibrarian.name = 'Anna';
-fLibrarian.assistCustomer('Boris');
-fLibrarian['printLibrarian']();
-console.log(fLibrarian);
+// let fLibrarian = new UniversityLibrarian();
+// fLibrarian.name = 'Anna';
+// fLibrarian.assistCustomer('Boris');
+// fLibrarian['printLibrarian']();
+// console.log(fLibrarian);

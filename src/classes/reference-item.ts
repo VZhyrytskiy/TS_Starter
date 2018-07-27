@@ -1,19 +1,4 @@
-import * as Interfaces from './interfaces';
-import { sealed, logger } from './decorators';
-
-@logger
-@sealed('UniversityLibrarian')
-class UniversityLibrarian implements Interfaces.Librarian {
-  name: string;
-  email: string;
-  department: string;
-
-  assistCustomer(custName: string) {
-    console.log(this.name + ' is assisting ' + custName);
-  }
-}
-
-abstract class ReferenceItem {
+export abstract class ReferenceItem {
   private _publisher: string;
   static department: string = 'Research';
 
@@ -36,5 +21,3 @@ abstract class ReferenceItem {
 
   abstract printCitation(): void;
 }
-
-export { UniversityLibrarian, ReferenceItem };
