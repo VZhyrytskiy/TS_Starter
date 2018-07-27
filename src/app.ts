@@ -1,21 +1,32 @@
-import "babel-polyfill";
 import { Category } from './enums';
 import { Book, Logger, Author, Librarian, Magazine } from './interfaces';
-import { UniversityLibrarian, ReferenceItem } from './classes';
-import { purge, getAllBooks, getBookTitlesByCategory, logFirstAvailable,
-    logBookTitles, getBookByID, createCustomerID, createCustomer, сheckoutBooks,
-  getTitles, PrintBook, getBooksByCategory, logCategorySearch,
-  getBooksByCategoryPromise, logSearchResults } from './lib/utility-functions';
-import RefBook from './encyclopedia';
-import Shelf from './shelf';
-import Encyclopedia from './encyclopedia';
+import { ReferenceItem, UniversityLibrarian, Shelf } from './classes';
+import RefBook from './classes/encyclopedia';
+import Encyclopedia from './classes/encyclopedia';
+import {
+  purge,
+  getAllBooks,
+  getBookTitlesByCategory,
+  logFirstAvailable,
+  logBookTitles,
+  getBookByID,
+  createCustomerID,
+  createCustomer,
+  сheckoutBooks,
+  getTitles,
+  PrintBook,
+  getBooksByCategory,
+  logCategorySearch,
+  getBooksByCategoryPromise,
+  logSearchResults
+} from './lib/utility-functions';
 
 // ---------------------------------------------
 // console.log(getAllBooks());
 
 // const allBooks = getAllBooks();
 // logFirstAvailable(allBooks);
-logFirstAvailable();
+// logFirstAvailable();
 
 // const javaScriptBooks = getBookTitlesByCategory(Category.JavaScript);
 // const javaScriptBooks = getBookTitlesByCategory();
@@ -82,6 +93,7 @@ logFirstAvailable();
 // let refBook: ReferenceItem = new RefBook('WorldPedia', 1900, 10);
 // refBook.printItem();
 
+// Task 18
 // let inventory: Array<Book> = [
 //   {
 //     id: 10,
@@ -172,6 +184,10 @@ logFirstAvailable();
 // l.name = 'Ann';
 // console.log(l);
 // console.log(l.name);
+
+// Task 24
+// const enc = new Encyclopedia('Title', 2018, 3);
+// enc.printItem();
 
 // Task 26
 const e = new Encyclopedia('title', 2018, 3);
