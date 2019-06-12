@@ -17,7 +17,6 @@ export function logger<TFunction extends Function>(
   };
   // это нужно так, как добавлен декоратор sealed и он запрещает обавлять методы
   newConstructor.prototype = Object.create(target.prototype);
-  newConstructor.prototype.constructor = target;
 
   // добавим новый метод
   newConstructor.prototype.printLibrarian = function() {
