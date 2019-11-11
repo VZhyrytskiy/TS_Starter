@@ -145,7 +145,7 @@ export function getTitles(bookProperty: any): string[] {
   return foundTitles;
 }
 
-export function PrintBook(book: Book): void {
+export function printBook(book: Book): void {
   console.log(`${book.title} by ${book.author}`);
 }
 
