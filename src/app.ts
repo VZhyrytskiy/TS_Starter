@@ -323,3 +323,8 @@ console.log(fLibrarian);
 // console.log(l);
 // console.log(l.name);
 // l.assistCustomer('Boris');
+
+// Task 27
+// const e = new Encyclopedia('title', 2018, 3);
+// e.copies = 13;
+// console.log(e.copies);

@@ -161,3 +161,19 @@ export function format(pref: string = 'Mr./Mrs.') {
     );
   };
 }
+
+export function positiveInteger(
+  target: any,
+  propertyName: string,
+  descriptor: PropertyDescriptor
+) {
+  const oldSet = descriptor.set;
+
+  descriptor.set = function(value: number) {
+    if (value <= 0 || !Number.isInteger(value)) {
+      throw new Error('Invalid value');
+    }
+
+    oldSet.call(this, value);
+  };
+}
