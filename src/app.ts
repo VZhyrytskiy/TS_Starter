@@ -137,7 +137,7 @@ function getTitles(bookProperty: any): string[] {
   return foundTitles;
 }
 
-function PrintBook(book: Book): void {
+function printBook(book: Book): void {
   console.log(`${book.title} by ${book.author}`);
 }
 
@@ -163,6 +163,7 @@ IdGenerator = createCustomerID;
 myID = IdGenerator('Ann', 20);
 console.log(myID);
 
+// Task 05
 createCustomer('Ann');
 createCustomer('Boris', 6);
 createCustomer('Clara', 12, 'Atlanta');
@@ -170,9 +171,11 @@ createCustomer('Clara', 12, 'Atlanta');
 let myBooks: string[] = сheckoutBooks('Ann', 1, 3, 4);
 myBooks.forEach(title => console.log(title));
 
+// Task 06
 let checkedOutBooks = getTitles(false);
 checkedOutBooks.forEach(title => console.log(title));
 
+// Task 07
 let myBook: Book = {
   id: 5,
   title: 'Colors, Backgrounds, and Gradients',
@@ -182,13 +185,15 @@ let myBook: Book = {
   pages: 200,
   markDamaged: (reason: string) => console.log(`Damaged: ${reason}`)
 };
-PrintBook(myBook);
+printBook(myBook);
 myBook.markDamaged('missing back cover');
 
+// Task 08, 15
 let logDamage: Logger;
 logDamage = (damage: string) => console.log('Damage reported: ' + damage);
 logDamage('coffee stains');
 
+// Task 09
 let favoriteAuthor: Author = {
   email: 'Anna@gmail.com',
   name: 'Anna',
@@ -201,10 +206,13 @@ let favoriteAuthor: Author = {
 //     department: 'Classical Literature',
 //     assistCustomer: (name: string) => console.log(`Assist ${name}`)
 // };
+
+// Task 10
 let favoriteLibrarian: Librarian = new UniversityLibrarian();
 favoriteLibrarian.name = 'Anna';
 favoriteLibrarian.assistCustomer('Boris');
 
+// Task 11
 // let ref: ReferenceItem = new ReferenceItem('Updated Facts and Figures', 2016);
 // ref.printItem();
 // ref.publisher = 'Random Data Publishing';
@@ -212,6 +220,14 @@ favoriteLibrarian.assistCustomer('Boris');
 
 // let refBook: ReferenceItem = new RefBook('WorldPedia', 1900, 10);
 // refBook.printItem();
+
+// Task 12, 16
+// let refBook: ReferenceItem = new Encyclopedia('WorldPedia', 1900, 10);
+let refBook: ReferenceItem = new RefBook('WorldPedia', 1900, 10);
+refBook.printItem();
+
+// Task 13
+refBook.printCitation();
 
 // Task 18
 let inventory: Array<Book> = [
@@ -265,6 +281,3 @@ let magazineShelf: Shelf<Magazine> = new Shelf<Magazine>();
 magazines.forEach(mag => magazineShelf.add(mag));
 let firstMagazine: Magazine = magazineShelf.getFirst();
 console.log(firstMagazine.title);
-
-let purgedNums: Array<number> = purge<number>([1, 2, 3, 4]);
-console.log(purgedNums);
