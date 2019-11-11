@@ -26,6 +26,18 @@ export function logger<TFunction extends Function>(
 
   return <TFunction>newConstructor;
 }
+export function writable(isWritable: boolean) {
+  return function(
+    target: Object,
+    propertyKey: string,
+    descriptor: PropertyDescriptor
+  ) {
+    console.log(`Setting ${propertyKey}.`);
+    descriptor.writable = isWritable;
+
+    return descriptor;
+  };
+}
 
 export function timeout(milliseconds: number = 0) {
   return function(
@@ -42,17 +54,6 @@ export function timeout(milliseconds: number = 0) {
     };
 
     return descriptor;
-  };
-}
-
-export function writable(isWritable: boolean) {
-  return function(
-    target: Object,
-    propertyKey: string,
-    descriptor: PropertyDescriptor
-  ) {
-    console.log(`Setting ${propertyKey}.`);
-    descriptor.writable = isWritable;
   };
 }
 
