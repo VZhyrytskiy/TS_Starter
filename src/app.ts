@@ -28,17 +28,17 @@ interface DamageLogger {
 }
 
 interface Person {
-    name: string;
-    email: string;
+  name: string;
+  email: string;
 }
 
 interface Author extends Person {
-    numBooksPublished: number;
+  numBooksPublished: number;
 }
 
 interface Librarian extends Person {
-    department: string;
-    assistCustomer: (custName: string) => void;
+  department: string;
+  assistCustomer: (custName: string) => void;
 }
 
 function getAllBooks(): Book[] {
@@ -179,14 +179,13 @@ function printBook(book: Book): void {
 }
 
 class UniversityLibrarian implements Librarian {
-    
-    name: string;
-    email: string;
-    department: string;
-    
-    assistCustomer(custName: string): void {
-        console.log(`${this.name} is assisting ${custName}`);
-    }
+  name: string;
+  email: string;
+  department: string;
+
+  assistCustomer(custName: string): void {
+    console.log(`${this.name} is assisting ${custName}`);
+  }
 }
 
 // ---------------------------------------------
@@ -243,9 +242,9 @@ logDamage('coffee stains');
 
 // Task 09
 let favoriteAuthor: Author = {
-    email: 'Anna@gmail.com',
-    name: 'Anna',
-    numBooksPublished: 3
+  email: 'Anna@gmail.com',
+  name: 'Anna',
+  numBooksPublished: 3
 };
 
 // let favoriteLibrarian: Librarian = {
@@ -254,6 +253,8 @@ let favoriteAuthor: Author = {
 //     department: 'Classical Literature',
 //     assistCustomer: (name: string) => console.log(`Assist ${name}`)
 // };
+
+// Task 10
 let favoriteLibrarian: Librarian = new UniversityLibrarian();
 favoriteLibrarian.name = 'Anna';
 favoriteLibrarian.assistCustomer('Boris');
