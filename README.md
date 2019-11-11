@@ -1,7 +1,10 @@
-# TS_Starter
-TypeScript Start Project
+This project is a seed project for TypeScript.
 
-1. npm install -g typescript gulp gulp-cli
-2. npm install
-3. gulp
+It uses webpack and webpack-dev-server.
 
+Install Dependencies
+> npm install
+
+Run the Project
+> npm start
+    
