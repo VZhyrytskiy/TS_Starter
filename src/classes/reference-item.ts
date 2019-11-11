@@ -1,5 +1,4 @@
-import { timeout } from '../decorators';
-
+import { timeout } from './../decorators';
 export abstract class ReferenceItem {
   private _publisher: string;
   static department: string = 'Research';
