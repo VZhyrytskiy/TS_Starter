@@ -44,19 +44,19 @@ function getAllBooks() {
   return books;
 }
 
-function logFirstAvailable(books): void {
+function logFirstAvailable(books: any[]): void {
   let numberOfBooks: number = books.length;
-  let firstAvailable: string = '';
+  let firstAvailableBookTitle: string = '';
 
   for (let currentBook of books) {
     if (currentBook.available) {
-      firstAvailable = currentBook.title;
+      firstAvailableBookTitle = currentBook.title;
       break;
     }
   }
 
   console.log(`Total Books: ${numberOfBooks}`);
-  console.log(`First Available: ${firstAvailable}`);
+  console.log(`First Available Book: ${firstAvailableBookTitle}`);
 }
 
 function getBookTitlesByCategory(categoryFilter: Category): Array<string> {
@@ -80,7 +80,28 @@ function logBookTitles(titles: string[]): void {
   }
 }
 
+function getBookAuthorByIndex(index: number): [string, string] {
+  const books = getAllBooks();
+  const { title, author } = books[index];
+  return [title, author];
+}
+
+function calcTotalPages(): BigInt {
+  const data = [
+    { lib: 'libName1', books: 1_000_000_000, avgPagesPerBook: 250 },
+    { lib: 'libName2', books: 5_000_000_000, avgPagesPerBook: 300 },
+    { lib: 'libName3', books: 3_000_000_000, avgPagesPerBook: 280 }
+  ];
+
+  let result = data.reduce((acc: bigint, obj) => {
+    return acc + BigInt(obj.books) * BigInt(obj.avgPagesPerBook);
+  }, 0n);
+
+  return result;
+}
+
 // ---------------------------------------------
+// Task 02.01
 console.log(getAllBooks());
 
 const allBooks = getAllBooks();
@@ -88,3 +109,8 @@ logFirstAvailable(allBooks);
 
 const javaScriptBooks = getBookTitlesByCategory(Category.JavaScript);
 logBookTitles(javaScriptBooks);
+
+const titleAndAuthor = getBookAuthorByIndex(2);
+console.log(titleAndAuthor);
+
+console.log(calcTotalPages());
