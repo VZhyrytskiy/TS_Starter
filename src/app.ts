@@ -170,6 +170,18 @@ function getTitles(...args: any[]): string[] {
   }
 }
 
+function assertStringValue(val: any): asserts val is string {
+  if (typeof val !== 'string') {
+    throw new Error('value should have been a string.');
+  }
+}
+
+function bookTitleTransform(title: any) {
+  assertStringValue(title);
+
+  return [...title].reverse().join('');
+}
+
 
 // ---------------------------------------------
 // Task 02.01
@@ -215,5 +227,13 @@ function getTitles(...args: any[]): string[] {
 // console.log(myBooks);
 
 // Task 03.04
-let checkedOutBooks = getTitles(false);
-console.log(checkedOutBooks);
+// let checkedOutBooks = getTitles(false);
+// console.log(checkedOutBooks);
+
+// Task 03.05
+const title1 = getAllBooks()[0].title;
+const title2 = 11;
+const result1 = bookTitleTransform(title1);
+console.log(result1);
+const result2 = bookTitleTransform(title2);
+console.log(result2);
