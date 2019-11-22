@@ -126,5 +126,5 @@ console.log(calcTotalPages());
 
 // Task 03.01
 javaScriptBooks.forEach((val, idx, arr) => console.log(++idx + ' - ' + val));
-
+console.log(getBookByID(1));
 
