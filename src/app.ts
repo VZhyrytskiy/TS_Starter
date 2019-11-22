@@ -14,7 +14,7 @@ enum Category {
 }
 
 function getAllBooks() {
-  let books = [
+  let books = <const>[
     {
       title: 'Refactoring JavaScript',
       author: 'Evan Burchard',
@@ -44,7 +44,7 @@ function getAllBooks() {
   return books;
 }
 
-function logFirstAvailable(books: any[]): void {
+function logFirstAvailable(books: readonly any[]): void {
   let numberOfBooks: number = books.length;
   let firstAvailableBookTitle: string = '';
 
@@ -87,7 +87,7 @@ function getBookAuthorByIndex(index: number): [string, string] {
 }
 
 function calcTotalPages(): BigInt {
-  const data = [
+  const data = <const>[
     { lib: 'libName1', books: 1_000_000_000, avgPagesPerBook: 250 },
     { lib: 'libName2', books: 5_000_000_000, avgPagesPerBook: 300 },
     { lib: 'libName3', books: 3_000_000_000, avgPagesPerBook: 280 }
@@ -114,3 +114,5 @@ const titleAndAuthor = getBookAuthorByIndex(2);
 console.log(titleAndAuthor);
 
 console.log(calcTotalPages());
+
+
