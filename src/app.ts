@@ -14,7 +14,7 @@ enum Category {
 }
 
 function getAllBooks() {
-  let books = [
+  let books = <const>[
     {
       id: 1,
       title: 'Refactoring JavaScript',
@@ -48,19 +48,19 @@ function getAllBooks() {
   return books;
 }
 
-function logFirstAvailable(books): void {
+function logFirstAvailable(books: readonly any[]): void {
   let numberOfBooks: number = books.length;
-  let firstAvailable: string = '';
+  let firstAvailableBookTitle: string = '';
 
   for (let currentBook of books) {
     if (currentBook.available) {
-      firstAvailable = currentBook.title;
+      firstAvailableBookTitle = currentBook.title;
       break;
     }
   }
 
   console.log(`Total Books: ${numberOfBooks}`);
-  console.log(`First Available: ${firstAvailable}`);
+  console.log(`First Available Book: ${firstAvailableBookTitle}`);
 }
 
 function getBookTitlesByCategory(categoryFilter: Category): Array<string> {
@@ -84,9 +84,29 @@ function logBookTitles(titles: string[]): void {
   }
 }
 
+function getBookAuthorByIndex(index: number): [string, string] {
+  const books = getAllBooks();
+  const { title, author } = books[index];
+  return [title, author];
+}
+
+function calcTotalPages(): BigInt {
+  const data = <const>[
+    { lib: 'libName1', books: 1_000_000_000, avgPagesPerBook: 250 },
+    { lib: 'libName2', books: 5_000_000_000, avgPagesPerBook: 300 },
+    { lib: 'libName3', books: 3_000_000_000, avgPagesPerBook: 280 }
+  ];
+
+  let result = data.reduce((acc: bigint, obj) => {
+    return acc + BigInt(obj.books) * BigInt(obj.avgPagesPerBook);
+  }, 0n);
+
+  return result;
+}
+
 function getBookByID(id: number) {
-  const allBooks = getAllBooks();
-  return allBooks.find(book => book.id === id);
+  const books = getAllBooks();
+  return books.find(book => book.id === id);
 }
 
 function createCustomerID(name: string, id: number): string {
@@ -94,21 +114,32 @@ function createCustomerID(name: string, id: number): string {
 }
 
 // ---------------------------------------------
-console.log(getAllBooks());
+// Task 02.01
+// console.log(getAllBooks());
 
-const allBooks = getAllBooks();
-logFirstAvailable(allBooks);
+// const allBooks = getAllBooks();
+// logFirstAvailable(allBooks);
 
-const javaScriptBooks = getBookTitlesByCategory(Category.JavaScript);
+// const javaScriptBooks = getBookTitlesByCategory(Category.JavaScript);
 // logBookTitles(javaScriptBooks);
-javaScriptBooks.forEach((val, idx, arr) => console.log(++idx + ' - ' + val));
 
+// const titleAndAuthor = getBookAuthorByIndex(2);
+// console.log(titleAndAuthor);
+
+// console.log(calcTotalPages());
+
+// Task 03.01
+// javaScriptBooks.forEach((val, idx, arr) => console.log(++idx + ' - ' + val));
+// console.log(getBookByID(1));
+
+// Task 03.02
 let myID = createCustomerID('Ann', 10);
 console.log(myID);
 
-// the names of parameters are not important 
+// the names of parameters are not important
 let IdGenerator: (chars: string, num: number) => string;
 IdGenerator = (name: string, id: number) => `${name}${id}`;
 IdGenerator = createCustomerID;
 myID = IdGenerator('Ann', 20);
 console.log(myID);
+
