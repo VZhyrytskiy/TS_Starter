@@ -41,6 +41,16 @@ interface Librarian extends Person {
   assistCustomer: (custName: string) => void;
 }
 
+type BookProperties = keyof Book;
+
+function getBookProp(book: Book, prop: BookProperties): any {
+  if (typeof book[prop] === 'function') {
+    return (book[prop] as Function).name;
+  }
+  return book[prop];
+}
+
+
 function getAllBooks(): readonly Book[] {
   let books: readonly Book[] = <const>[
     {
@@ -304,10 +314,15 @@ function bookTitleTransform(title: any) {
 // };
 
 // Task 04.04
-const offer: any = {
-  book: {
-    title: 'Essential TypeScript'
-  }
-};
+// const offer: any = {
+//   book: {
+//     title: 'Essential TypeScript'
+//   }
+// };
 
-console.log(offer?.magazine);
+// console.log(offer?.magazine);
+
+// Task 04.05
+console.log(getBookProp(getAllBooks()[0], 'title'));        // Refactoring JavaScript
+console.log(getBookProp(getAllBooks()[0], 'markDamaged'));  // undefined
+// console.log(getBookProp(getAllBooks()[0], 'isbn'));      // error
