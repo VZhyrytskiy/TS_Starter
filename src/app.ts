@@ -125,19 +125,19 @@ function getBookAuthorByIndex(index: number): [string, string] {
   return [title, author];
 }
 
-function calcTotalPages(): BigInt {
-  const data = <const>[
-    { lib: 'libName1', books: 1_000_000_000, avgPagesPerBook: 250 },
-    { lib: 'libName2', books: 5_000_000_000, avgPagesPerBook: 300 },
-    { lib: 'libName3', books: 3_000_000_000, avgPagesPerBook: 280 }
-  ];
+// function calcTotalPages(): BigInt {
+//   const data = <const>[
+//     { lib: 'libName1', books: 1_000_000_000, avgPagesPerBook: 250 },
+//     { lib: 'libName2', books: 5_000_000_000, avgPagesPerBook: 300 },
+//     { lib: 'libName3', books: 3_000_000_000, avgPagesPerBook: 280 }
+//   ];
 
-  let result = data.reduce((acc: bigint, obj) => {
-    return acc + BigInt(obj.books) * BigInt(obj.avgPagesPerBook);
-  }, 0n);
+//   let result = data.reduce((acc: bigint, obj) => {
+//     return acc + BigInt(obj.books) * BigInt(obj.avgPagesPerBook);
+//   }, 0n);
 
-  return result;
-}
+//   return result;
+// }
 
 
 function createCustomerID(name: string, id: number): string {
@@ -290,15 +290,24 @@ function bookTitleTransform(title: any) {
 // logDamage('coffee stains');
 
 // Task 04.03
-let favoriteAuthor: Author = {
-  email: 'Anna@gmail.com',
-  name: 'Anna',
-  numBooksPublished: 3
+// let favoriteAuthor: Author = {
+//   email: 'Anna@gmail.com',
+//   name: 'Anna',
+//   numBooksPublished: 3
+// };
+
+// let favoriteLibrarian: Librarian = {
+//   name: 'Boris',
+//   email: 'Boris@gmail.com',
+//   department: 'Classical Literature',
+//   assistCustomer: (name: string) => console.log(`Assist ${name}`)
+// };
+
+// Task 04.04
+const offer: any = {
+  book: {
+    title: 'Essential TypeScript'
+  }
 };
 
-let favoriteLibrarian: Librarian = {
-  name: 'Boris',
-  email: 'Boris@gmail.com',
-  department: 'Classical Literature',
-  assistCustomer: (name: string) => console.log(`Assist ${name}`)
-};
+console.log(offer?.magazine);
