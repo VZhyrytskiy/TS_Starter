@@ -258,20 +258,19 @@ function bookTitleTransform(title: any) {
 // console.log(result2);
 
 // Task 04.01
-// Task 07
-let myBook: Book = {
-  id: 5,
-  title: 'Colors, Backgrounds, and Gradients',
-  author: 'Eric A. Meyer',
-  available: true,
-  category: Category.CSS,
-  pages: 200,
-  markDamaged: (reason: string) => console.log(`Damaged: ${reason}`)
-};
-printBook(myBook);
-myBook.markDamaged('missing back cover');
+// let myBook: Book = {
+//   id: 5,
+//   title: 'Colors, Backgrounds, and Gradients',
+//   author: 'Eric A. Meyer',
+//   available: true,
+//   category: Category.CSS,
+//   pages: 200,
+//   markDamaged: (reason: string) => console.log(`Damaged: ${reason}`)
+// };
+// printBook(myBook);
+// myBook.markDamaged('missing back cover');
 
-// Task 08
+// Task 04.02
 let logDamage: DamageLogger;
 logDamage = (damage: string) => console.log('Damage reported: ' + damage);
 logDamage('coffee stains');
