@@ -272,6 +272,18 @@ class Encyclopedia extends ReferenceItem {
   }
 }
 
+class UniversityLibrarian implements Librarian {
+
+  name: string;
+  email: string;
+  department: string;
+
+  assistCustomer(custName: string): void {
+    console.log(`${this.name} is assisting ${custName}`);
+  }
+}
+
+
 // ---------------------------------------------
 // Task 02.01
 // console.log(getAllBooks());
@@ -384,5 +396,11 @@ class Encyclopedia extends ReferenceItem {
 // refBook.printItem();
 
 // Task 05.03
-let refBook: ReferenceItem = new Encyclopedia('WorldPedia', 1900, 10);
-refBook.printCitation();
+// let refBook: ReferenceItem = new Encyclopedia('WorldPedia', 1900, 10);
+// refBook.printCitation();
+
+// Task 05.04
+let favoriteLibrarian: Librarian = new UniversityLibrarian();
+favoriteLibrarian.name = 'Anna';
+favoriteLibrarian.assistCustomer('Boris');
+
