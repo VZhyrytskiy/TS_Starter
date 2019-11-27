@@ -41,8 +41,18 @@ interface Librarian extends Person {
   assistCustomer: (custName: string) => void;
 }
 
-function getAllBooks(): Book[] {
-  let books = [
+type BookProperties = keyof Book;
+
+function getBookProp(book: Book, prop: BookProperties): any {
+  if (typeof book[prop] === 'function') {
+    return (book[prop] as Function).name;
+  }
+  return book[prop];
+}
+
+
+function getAllBooks(): readonly Book[] {
+  let books: readonly Book[] = <const>[
     {
       id: 1,
       title: 'Refactoring JavaScript',
@@ -76,19 +86,19 @@ function getAllBooks(): Book[] {
   return books;
 }
 
-function logFirstAvailable(books = getAllBooks()): void {
+function logFirstAvailable(books: readonly any[] = getAllBooks()): void {
   let numberOfBooks: number = books.length;
-  let firstAvailable: string = '';
+  let firstAvailableBookTitle: string = '';
 
   for (let currentBook of books) {
     if (currentBook.available) {
-      firstAvailable = currentBook.title;
+      firstAvailableBookTitle = currentBook.title;
       break;
     }
   }
 
   console.log(`Total Books: ${numberOfBooks}`);
-  console.log(`First Available: ${firstAvailable}`);
+  console.log(`First Available Book: ${firstAvailableBookTitle}`);
 }
 
 function getBookTitlesByCategory(
@@ -118,6 +128,27 @@ function getBookByID(id: number): Book | undefined {
   const allBooks = getAllBooks();
   return allBooks.find(book => book.id === id);
 }
+
+function getBookAuthorByIndex(index: number): [string, string] {
+  const books = getAllBooks();
+  const { title, author } = books[index];
+  return [title, author];
+}
+
+// function calcTotalPages(): BigInt {
+//   const data = <const>[
+//     { lib: 'libName1', books: 1_000_000_000, avgPagesPerBook: 250 },
+//     { lib: 'libName2', books: 5_000_000_000, avgPagesPerBook: 300 },
+//     { lib: 'libName3', books: 3_000_000_000, avgPagesPerBook: 280 }
+//   ];
+
+//   let result = data.reduce((acc: bigint, obj) => {
+//     return acc + BigInt(obj.books) * BigInt(obj.avgPagesPerBook);
+//   }, 0n);
+
+//   return result;
+// }
+
 
 function createCustomerID(name: string, id: number): string {
   return `${name}${id}`;
@@ -152,40 +183,46 @@ function сheckoutBooks(customer: string, ...bookIDs: number[]): string[] {
 
 function getTitles(author: string): string[];
 function getTitles(available: boolean): string[];
-function getTitles(bookProperty: any): string[] {
-  const allBooks = getAllBooks();
-  const foundTitles: string[] = [];
+function getTitles(id: number, available: boolean): string[];
+function getTitles(...args: any[]): string[] {
+  const books = getAllBooks();
+  if (args.length === 0) {
+    return [];
+  }
+  else if (args.length === 1) {
+    const arg = args[0];
 
-  if (typeof bookProperty === 'string') {
-    // get all books by a particular author
-    for (let book of allBooks) {
-      if (book.author === bookProperty) {
-        foundTitles.push(book.title);
-      }
+    if (typeof arg === 'string') {
+      return books.filter(book => book.author === arg).map(book => book.title);
     }
-  } else if (typeof bookProperty === 'boolean') {
-    // get all books based on specified availability
-    for (let book of allBooks) {
-      if (book.available === bookProperty) {
-        foundTitles.push(book.title);
-      }
+    else if (typeof arg === 'boolean') {
+      return books.filter(book => book.available === arg).map(book => book.title);
     }
   }
-  return foundTitles;
+  else if (args.length === 2) {
+    const id = args[0];
+    const available = args[1];
+
+    if (typeof id === 'number' && available === 'boolean') {
+      return books.filter(book => book.id === id && book.available === available).map(book => book.title);
+    }
+  }
 }
 
 function printBook(book: Book): void {
   console.log(`${book.title} by ${book.author}`);
 }
 
-class UniversityLibrarian implements Librarian {
-  name: string;
-  email: string;
-  department: string;
-
-  assistCustomer(custName: string): void {
-    console.log(`${this.name} is assisting ${custName}`);
+function assertStringValue(val: any): asserts val is string {
+  if (typeof val !== 'string') {
+    throw new Error('value should have been a string.');
   }
+}
+
+function bookTitleTransform(title: any) {
+  assertStringValue(title);
+
+  return [...title].reverse().join('');
 }
 
 class ReferenceItem {
@@ -218,78 +255,109 @@ class ReferenceItem {
   }
 }
 
-// ---------------------------------------------
-console.log(getAllBooks());
 
-const allBooks = getAllBooks();
+// ---------------------------------------------
+// Task 02.01
+// console.log(getAllBooks());
+
+// const allBooks = getAllBooks();
 // logFirstAvailable(allBooks);
-logFirstAvailable();
 
 // const javaScriptBooks = getBookTitlesByCategory(Category.JavaScript);
-const javaScriptBooks = getBookTitlesByCategory();
 // logBookTitles(javaScriptBooks);
-javaScriptBooks.forEach((val, idx, arr) => console.log(++idx + ' - ' + val));
 
-let myID = createCustomerID('Ann', 10);
-console.log(myID);
+// const titleAndAuthor = getBookAuthorByIndex(2);
+// console.log(titleAndAuthor);
 
-// the names of parameters are not important
-let IdGenerator: (chars: string, num: number) => string;
-IdGenerator = (name: string, id: number) => `${name}${id}`;
-IdGenerator = createCustomerID;
-myID = IdGenerator('Ann', 20);
-console.log(myID);
+// console.log(calcTotalPages());
 
-// Task 05
-createCustomer('Ann');
-createCustomer('Boris', 6);
-createCustomer('Clara', 12, 'Atlanta');
+// Task 03.01
+// javaScriptBooks.forEach((val, idx, arr) => console.log(++idx + ' - ' + val));
+// console.log(getBookByID(1));
 
-let myBooks: string[] = сheckoutBooks('Ann', 1, 3, 4);
-myBooks.forEach(title => console.log(title));
+// Task 03.02
+// let myID = createCustomerID('Ann', 10);
+// console.log(myID);
 
-// Task 06
-let checkedOutBooks = getTitles(false);
-checkedOutBooks.forEach(title => console.log(title));
+// // the names of parameters are not important
+// let IdGenerator: (chars: string, num: number) => string;
+// IdGenerator = (name: string, id: number) => `${name}${id}`;
+// IdGenerator = createCustomerID;
+// myID = IdGenerator('Ann', 20);
+// console.log(myID);
 
-// Task 07
-let myBook: Book = {
-  id: 5,
-  title: 'Colors, Backgrounds, and Gradients',
-  author: 'Eric A. Meyer',
-  available: true,
-  category: Category.CSS,
-  pages: 200,
-  markDamaged: (reason: string) => console.log(`Damaged: ${reason}`)
-};
-printBook(myBook);
-myBook.markDamaged('missing back cover');
+// Task 03.03
+// createCustomer('Ann');
+// createCustomer('Boris', 6);
+// createCustomer('Clara', 12, 'Atlanta');
 
-// Task 08
-let logDamage: DamageLogger;
-logDamage = (damage: string) => console.log('Damage reported: ' + damage);
-logDamage('coffee stains');
+// const titles = getBookTitlesByCategory();
+// console.log(titles);
 
-// Task 09
-let favoriteAuthor: Author = {
-  email: 'Anna@gmail.com',
-  name: 'Anna',
-  numBooksPublished: 3
-};
+// logFirstAvailable();
 
-// let favoriteLibrarian: Librarian = {
-//     name: 'Boris',
-//     email: 'Boris@gmail.com',
-//     department: 'Classical Literature',
-//     assistCustomer: (name: string) => console.log(`Assist ${name}`)
+// let myBooks: string[] = сheckoutBooks('Ann', 1, 3, 4);
+// console.log(myBooks);
+
+// Task 03.04
+// let checkedOutBooks = getTitles(false);
+// console.log(checkedOutBooks);
+
+// Task 03.05
+// const title1 = getAllBooks()[0].title;
+// const title2 = 11;
+// const result1 = bookTitleTransform(title1);
+// console.log(result1);
+// const result2 = bookTitleTransform(title2);
+// console.log(result2);
+
+// Task 04.01
+// let myBook: Book = {
+//   id: 5,
+//   title: 'Colors, Backgrounds, and Gradients',
+//   author: 'Eric A. Meyer',
+//   available: true,
+//   category: Category.CSS,
+//   pages: 200,
+//   markDamaged: (reason: string) => console.log(`Damaged: ${reason}`)
+// };
+// printBook(myBook);
+// myBook.markDamaged('missing back cover');
+
+// Task 04.02
+// let logDamage: DamageLogger;
+// logDamage = (damage: string) => console.log('Damage reported: ' + damage);
+// logDamage('coffee stains');
+
+// Task 04.03
+// let favoriteAuthor: Author = {
+//   email: 'Anna@gmail.com',
+//   name: 'Anna',
+//   numBooksPublished: 3
 // };
 
-// Task 10
-let favoriteLibrarian: Librarian = new UniversityLibrarian();
-favoriteLibrarian.name = 'Anna';
-favoriteLibrarian.assistCustomer('Boris');
+// let favoriteLibrarian: Librarian = {
+//   name: 'Boris',
+//   email: 'Boris@gmail.com',
+//   department: 'Classical Literature',
+//   assistCustomer: (name: string) => console.log(`Assist ${name}`)
+// };
 
-// Task 11
+// Task 04.04
+// const offer: any = {
+//   book: {
+//     title: 'Essential TypeScript'
+//   }
+// };
+
+// console.log(offer?.magazine);
+
+// Task 04.05
+// console.log(getBookProp(getAllBooks()[0], 'title'));        // Refactoring JavaScript
+// console.log(getBookProp(getAllBooks()[0], 'markDamaged'));  // undefined
+// console.log(getBookProp(getAllBooks()[0], 'isbn'));      // error
+
+// Task 05.01
 let ref: ReferenceItem = new ReferenceItem('Updated Facts and Figures', 2016);
 ref.printItem();
 ref.publisher = 'Random Data Publishing';
