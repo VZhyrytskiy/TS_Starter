@@ -42,6 +42,8 @@ interface Librarian extends Person {
 }
 
 type BookProperties = keyof Book;
+type PersonBook = Person & Book;
+type BookOrUndefined = Book | undefined;
 
 function getBookProp(book: Book, prop: BookProperties): any {
   if (typeof book[prop] === 'function') {
@@ -124,7 +126,7 @@ function logBookTitles(titles: string[]): void {
   }
 }
 
-function getBookByID(id: number): Book | undefined {
+function getBookByID(id: number): BookOrUndefined {
   const allBooks = getAllBooks();
   return allBooks.find(book => book.id === id);
 }
@@ -400,7 +402,20 @@ class UniversityLibrarian implements Librarian {
 // refBook.printCitation();
 
 // Task 05.04
-let favoriteLibrarian: Librarian = new UniversityLibrarian();
-favoriteLibrarian.name = 'Anna';
-favoriteLibrarian.assistCustomer('Boris');
+// let favoriteLibrarian: Librarian = new UniversityLibrarian();
+// favoriteLibrarian.name = 'Anna';
+// favoriteLibrarian.assistCustomer('Boris');
+
+// Task 05.05
+const personBook: PersonBook = {
+  name: 'Anna',
+  email: 'anna@example.com',
+  author: 'Boris',
+  available: true,
+  category: Category.HTML,
+  id: 1,
+  title: 'Introduction to HTML'
+};
+console.log(personBook);
+
 
