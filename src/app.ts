@@ -137,5 +137,13 @@ import { assertStringValue, getAllBooks, bookTitleTransform, createCustomer, cre
 
 // Task 06.03
 // let refBook: ReferenceItem = new Encyclopedia('WorldPedia', 1900, 10);
-let refBook: ReferenceItem = new RefBook('WorldPedia', 1900, 10);
-refBook.printItem();
+// let refBook: ReferenceItem = new RefBook('WorldPedia', 1900, 10);
+// refBook.printItem();
+
+// Task 06.05
+import('./classes').then(module => {
+    const reader = new module.Reader();
+    console.log(reader);
+    reader.name = 'Anna';
+    reader.take(getAllBooks()[1]);
+});
