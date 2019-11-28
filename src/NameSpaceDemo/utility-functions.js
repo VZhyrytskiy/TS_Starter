@@ -3,7 +3,7 @@ var Utility;
     var Fees;
     (function (Fees) {
         function CalculateLateFee(daysLate) {
-            return daysLate * .25;
+            return daysLate * 0.25;
         }
         Fees.CalculateLateFee = CalculateLateFee;
     })(Fees = Utility.Fees || (Utility.Fees = {}));
