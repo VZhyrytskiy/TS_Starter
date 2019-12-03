@@ -210,21 +210,24 @@ import { BookRequiredFields, createCustomerFunctionType, UpdatedBook } from './t
 // console.log(`${softwareBook.title} (${softwareBook.author})`);
 
 // Task 07.04
-const book: BookRequiredFields = {
-  id: 1,
-  title: 'Refactoring JavaScript',
-  author: 'Evan Burchard',
-  available: true,
-  category: Category.JavaScript,
-  markDamaged: null,
-  pages: 200
-};
+// const book: BookRequiredFields = {
+//   id: 1,
+//   title: 'Refactoring JavaScript',
+//   author: 'Evan Burchard',
+//   available: true,
+//   category: Category.JavaScript,
+//   markDamaged: null,
+//   pages: 200
+// };
 
-const updatedBook: UpdatedBook = {
-  id: 1,
-  title: 'Refactoring JavaScript'
-};
+// const updatedBook: UpdatedBook = {
+//   id: 1,
+//   title: 'Refactoring JavaScript'
+// };
 
 
-const params: Parameters<createCustomerFunctionType> = ['Anna'];
-createCustomer(...params);
+// const params: Parameters<createCustomerFunctionType> = ['Anna'];
+// createCustomer(...params);
+
+// Task 08.01
+let favoriteLibrarian: any = new UniversityLibrarian();

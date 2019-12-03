@@ -1,5 +1,5 @@
 import * as Interfaces from '../interfaces';
-import { sealed } from '../decorators';
+import { sealed } from './../decorators';
 
 @sealed('UniversityLibrarian')
 export class UniversityLibrarian implements Interfaces.Librarian {
