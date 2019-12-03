@@ -29,8 +29,8 @@ interface Librarian extends Person {
 }
 
 interface Magazine {
-    title: string;
-    publisher: string;
+  title: string;
+  publisher: string;
 }
 
-export { Book, DamageLogger as Logger, Author, Librarian, Magazine };
+export { Book, DamageLogger as Logger, Person, Author, Librarian, Magazine };
