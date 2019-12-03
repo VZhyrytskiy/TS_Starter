@@ -37,4 +37,4 @@ interface ShelfItem {
   title: string;
 }
 
-export { Book, DamageLogger as Logger, Author, Librarian, Magazine, ShelfItem };
+export { Book, DamageLogger as Logger, Person, Author, Librarian, Magazine, ShelfItem };
