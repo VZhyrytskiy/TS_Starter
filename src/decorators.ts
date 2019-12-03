@@ -15,7 +15,7 @@ export function logger<TFunction extends Function>(
 
     this.age = 30;
   };
-  // это нужно так, как добавлен декоратор sealed и он запрещает обавлять методы
+  // это нужно так, как добавлен декоратор sealed и он запрещает добавлять методы
   newConstructor.prototype = Object.create(target.prototype);
 
   // добавим новый метод
@@ -46,7 +46,7 @@ export function timeout(milliseconds: number = 0) {
   ) {
     const originalMethod = descriptor.value;
 
-    descriptor.value = function(...args) {
+    descriptor.value = function(...args: any) {
       setTimeout(() => {
         originalMethod.apply(this, args);
       }, milliseconds);
