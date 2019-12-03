@@ -2,6 +2,7 @@ import { Category } from './enums';
 import { Book, Logger, Author, Librarian, Magazine } from './interfaces';
 import { UniversityLibrarian, ReferenceItem, RefBook, Shelf } from './classes';
 import { assertStringValue, getAllBooks, bookTitleTransform, createCustomer, createCustomerID, getBookAuthorByIndex, getBookByID, getBookProp, getBookTitlesByCategory, getTitles, logBookTitles, logFirstAvailable, printBook, сheckoutBooks, purge } from './functions';
+import { BookRequiredFields, createCustomerFunctionType, UpdatedBook } from './types';
 
 // ---------------------------------------------
 // Task 02.01
@@ -149,36 +150,36 @@ import { assertStringValue, getAllBooks, bookTitleTransform, createCustomer, cre
 // });
 
 // Task 07.01
-let inventory: Array<Book> = [
-    {
-      id: 10,
-      title: 'The C Programming Language',
-      author: 'K & R',
-      available: true,
-      category: Category.Software
-    },
-    {
-      id: 11,
-      title: 'Code Complete',
-      author: 'Steve McConnell',
-      available: true,
-      category: Category.Software
-    },
-    {
-      id: 12,
-      title: '8-Bit Graphics with Cobol',
-      author: 'A. B.',
-      available: true,
-      category: Category.Software
-    },
-    {
-      id: 13,
-      title: 'Cool autoexec.bat Scripts!',
-      author: 'C. D.',
-      available: true,
-      category: Category.Software
-    }
-  ];
+// let inventory: Array<Book> = [
+//     {
+//       id: 10,
+//       title: 'The C Programming Language',
+//       author: 'K & R',
+//       available: true,
+//       category: Category.Software
+//     },
+//     {
+//       id: 11,
+//       title: 'Code Complete',
+//       author: 'Steve McConnell',
+//       available: true,
+//       category: Category.Software
+//     },
+//     {
+//       id: 12,
+//       title: '8-Bit Graphics with Cobol',
+//       author: 'A. B.',
+//       available: true,
+//       category: Category.Software
+//     },
+//     {
+//       id: 13,
+//       title: 'Cool autoexec.bat Scripts!',
+//       author: 'C. D.',
+//       available: true,
+//       category: Category.Software
+//     }
+//   ];
 
 //   let purgedBooks: Array<Book> = purge<Book>(inventory);
 //   console.log(purgedBooks);
@@ -187,23 +188,43 @@ let inventory: Array<Book> = [
 //   console.log(purgedNums);
 
 // Task 07.02
-let bookShelf: Shelf<Book> = new Shelf<Book>();
-inventory.forEach(book => bookShelf.add(book));
-let firstBook: Book = bookShelf.getFirst();
-console.log(firstBook.title);
+// let bookShelf: Shelf<Book> = new Shelf<Book>();
+// inventory.forEach(book => bookShelf.add(book));
+// let firstBook: Book = bookShelf.getFirst();
+// console.log(firstBook.title);
 
-let magazines: Array<Magazine> = [
-  { title: 'Programming Language Monthly', publisher: 'Code Mags' },
-  { title: 'Literary Fiction Quarterly', publisher: 'College Press' },
-  { title: 'Five Points', publisher: 'GSU' }
-];
+// let magazines: Array<Magazine> = [
+//   { title: 'Programming Language Monthly', publisher: 'Code Mags' },
+//   { title: 'Literary Fiction Quarterly', publisher: 'College Press' },
+//   { title: 'Five Points', publisher: 'GSU' }
+// ];
 
-let magazineShelf: Shelf<Magazine> = new Shelf<Magazine>();
-magazines.forEach(mag => magazineShelf.add(mag));
-let firstMagazine: Magazine = magazineShelf.getFirst();
-console.log(firstMagazine.title);
+// let magazineShelf: Shelf<Magazine> = new Shelf<Magazine>();
+// magazines.forEach(mag => magazineShelf.add(mag));
+// let firstMagazine: Magazine = magazineShelf.getFirst();
+// console.log(firstMagazine.title);
 
 // Task 07.03
-magazineShelf.printTitles();
-let softwareBook = bookShelf.find('Code Complete');
-console.log(`${softwareBook.title} (${softwareBook.author})`);
+// magazineShelf.printTitles();
+// let softwareBook = bookShelf.find('Code Complete');
+// console.log(`${softwareBook.title} (${softwareBook.author})`);
+
+// Task 07.04
+const book: BookRequiredFields = {
+  id: 1,
+  title: 'Refactoring JavaScript',
+  author: 'Evan Burchard',
+  available: true,
+  category: Category.JavaScript,
+  markDamaged: null,
+  pages: 200
+};
+
+const updatedBook: UpdatedBook = {
+  id: 1,
+  title: 'Refactoring JavaScript'
+};
+
+
+const params: Parameters<createCustomerFunctionType> = ['Anna'];
+createCustomer(...params);
