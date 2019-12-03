@@ -15,7 +15,7 @@ export function logger<TFunction extends Function>(
 
     this.age = 30;
   };
-  // это нужно так, как добавлен декоратор sealed и он запрещает обавлять методы
+  // это нужно так, как добавлен декоратор sealed и он запрещает добавлять методы
   newConstructor.prototype = Object.create(target.prototype);
   newConstructor.prototype.constructor = target;
 

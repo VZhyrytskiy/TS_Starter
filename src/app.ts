@@ -1,295 +1,241 @@
 import { Category } from './enums';
 import { Book, Logger, Author, Librarian, Magazine } from './interfaces';
-import { ReferenceItem, UniversityLibrarian, Shelf } from './classes';
-import RefBook from './classes/encyclopedia';
-import { purge } from './lib/utility-functions';
-
-function getAllBooks(): Book[] {
-  let books = [
-    {
-      id: 1,
-      title: 'Refactoring JavaScript',
-      author: 'Evan Burchard',
-      available: true,
-      category: Category.JavaScript
-    },
-    {
-      id: 2,
-      title: 'JavaScript Testing',
-      author: 'Liang Yuxian Eugene',
-      available: false,
-      category: Category.JavaScript
-    },
-    {
-      id: 3,
-      title: 'CSS Secrets',
-      author: 'Lea Verou',
-      available: true,
-      category: Category.CSS
-    },
-    {
-      id: 4,
-      title: 'Mastering JavaScript Object-Oriented Programming',
-      author: 'Andrea Chiarelli',
-      available: true,
-      category: Category.JavaScript
-    }
-  ];
-
-  return books;
-}
-
-function logFirstAvailable(books = getAllBooks()): void {
-  let numberOfBooks: number = books.length;
-  let firstAvailable: string = '';
-
-  for (let currentBook of books) {
-    if (currentBook.available) {
-      firstAvailable = currentBook.title;
-      break;
-    }
-  }
-
-  console.log(`Total Books: ${numberOfBooks}`);
-  console.log(`First Available: ${firstAvailable}`);
-}
-
-function getBookTitlesByCategory(
-  categoryFilter: Category = Category.JavaScript
-): Array<string> {
-  console.log(`Getting books in category: ${Category[categoryFilter]}`);
-
-  const allBooks = getAllBooks();
-  const filteredTitles: string[] = [];
-
-  for (let currentBook of allBooks) {
-    if (currentBook.category === categoryFilter) {
-      filteredTitles.push(currentBook.title);
-    }
-  }
-
-  return filteredTitles;
-}
-
-function logBookTitles(titles: string[]): void {
-  for (let title of titles) {
-    console.log(title);
-  }
-}
-
-function getBookByID(id: number): Book | undefined {
-  const allBooks = getAllBooks();
-  return allBooks.find(book => book.id === id);
-}
-
-function createCustomerID(name: string, id: number): string {
-  return `${name}${id}`;
-}
-
-function createCustomer(name: string, age?: number, city?: string): void {
-  console.log(`Creating customer ${name}`);
-
-  if (age) {
-    console.log(`Age: ${age}`);
-  }
-
-  if (city) {
-    console.log(`City: ${city}`);
-  }
-}
-
-function сheckoutBooks(customer: string, ...bookIDs: number[]): string[] {
-  console.log(`Checking out books for ${customer}`);
-
-  let booksCheckedOut: string[] = [];
-
-  for (let id of bookIDs) {
-    let book = getBookByID(id);
-    if (book && book.available) {
-      booksCheckedOut.push(book.title);
-    }
-  }
-
-  return booksCheckedOut;
-}
-
-function getTitles(author: string): string[];
-function getTitles(available: boolean): string[];
-function getTitles(bookProperty: any): string[] {
-  const allBooks = getAllBooks();
-  const foundTitles: string[] = [];
-
-  if (typeof bookProperty === 'string') {
-    // get all books by a particular author
-    for (let book of allBooks) {
-      if (book.author === bookProperty) {
-        foundTitles.push(book.title);
-      }
-    }
-  } else if (typeof bookProperty === 'boolean') {
-    // get all books based on specified availability
-    for (let book of allBooks) {
-      if (book.available === bookProperty) {
-        foundTitles.push(book.title);
-      }
-    }
-  }
-  return foundTitles;
-}
-
-function printBook(book: Book): void {
-  console.log(`${book.title} by ${book.author}`);
-}
+import { UniversityLibrarian, ReferenceItem, RefBook, Shelf } from './classes';
+import { assertStringValue, getAllBooks, bookTitleTransform, createCustomer, createCustomerID, getBookAuthorByIndex, getBookByID, getBookProp, getBookTitlesByCategory, getTitles, logBookTitles, logFirstAvailable, printBook, сheckoutBooks, purge } from './functions';
+import { BookRequiredFields, createCustomerFunctionType, UpdatedBook } from './types';
 
 // ---------------------------------------------
+// Task 02.01
 // console.log(getAllBooks());
 
 // const allBooks = getAllBooks();
 // logFirstAvailable(allBooks);
-logFirstAvailable();
 
 // const javaScriptBooks = getBookTitlesByCategory(Category.JavaScript);
-// const javaScriptBooks = getBookTitlesByCategory();
 // logBookTitles(javaScriptBooks);
+
+// const titleAndAuthor = getBookAuthorByIndex(2);
+// console.log(titleAndAuthor);
+
+// console.log(calcTotalPages());
+
+// Task 03.01
 // javaScriptBooks.forEach((val, idx, arr) => console.log(++idx + ' - ' + val));
+// console.log(getBookByID(1));
 
-let myID = createCustomerID('Ann', 10);
-console.log(myID);
+// Task 03.02
+// let myID = createCustomerID('Ann', 10);
+// console.log(myID);
 
-// the names of parameters are not important
-let IdGenerator: (chars: string, num: number) => string;
-IdGenerator = (name: string, id: number) => `${name}${id}`;
-IdGenerator = createCustomerID;
-myID = IdGenerator('Ann', 20);
-console.log(myID);
+// // the names of parameters are not important
+// let IdGenerator: (chars: string, num: number) => string;
+// IdGenerator = (name: string, id: number) => `${name}${id}`;
+// IdGenerator = createCustomerID;
+// myID = IdGenerator('Ann', 20);
+// console.log(myID);
 
-// Task 05
-createCustomer('Ann');
-createCustomer('Boris', 6);
-createCustomer('Clara', 12, 'Atlanta');
+// Task 03.03
+// createCustomer('Ann');
+// createCustomer('Boris', 6);
+// createCustomer('Clara', 12, 'Atlanta');
 
-let myBooks: string[] = сheckoutBooks('Ann', 1, 3, 4);
-myBooks.forEach(title => console.log(title));
+// const titles = getBookTitlesByCategory();
+// console.log(titles);
 
-// Task 06
-let checkedOutBooks = getTitles(false);
-checkedOutBooks.forEach(title => console.log(title));
+// logFirstAvailable();
 
-// Task 07
-let myBook: Book = {
-  id: 5,
-  title: 'Colors, Backgrounds, and Gradients',
-  author: 'Eric A. Meyer',
-  available: true,
-  category: Category.CSS,
-  pages: 200,
-  markDamaged: (reason: string) => console.log(`Damaged: ${reason}`)
-};
-printBook(myBook);
-myBook.markDamaged('missing back cover');
+// let myBooks: string[] = сheckoutBooks('Ann', 1, 3, 4);
+// console.log(myBooks);
 
-// Task 08, 15
-let logDamage: Logger;
-logDamage = (damage: string) => console.log('Damage reported: ' + damage);
-logDamage('coffee stains');
+// Task 03.04
+// let checkedOutBooks = getTitles(false);
+// console.log(checkedOutBooks);
 
-// Task 09
-let favoriteAuthor: Author = {
-  email: 'Anna@gmail.com',
-  name: 'Anna',
-  numBooksPublished: 3
-};
+// Task 03.05
+// const title1 = getAllBooks()[0].title;
+// const title2 = 11;
+// const result1 = bookTitleTransform(title1);
+// console.log(result1);
+// const result2 = bookTitleTransform(title2);
+// console.log(result2);
 
-// let favoriteLibrarian: Librarian = {
-//     name: 'Boris',
-//     email: 'Boris@gmail.com',
-//     department: 'Classical Literature',
-//     assistCustomer: (name: string) => console.log(`Assist ${name}`)
+// Task 04.01
+// let myBook: Book = {
+//   id: 5,
+//   title: 'Colors, Backgrounds, and Gradients',
+//   author: 'Eric A. Meyer',
+//   available: true,
+//   category: Category.CSS,
+//   pages: 200,
+//   markDamaged: (reason: string) => console.log(`Damaged: ${reason}`)
+// };
+// printBook(myBook);
+// myBook.markDamaged('missing back cover');
+
+// Task 04.02
+// let logDamage: Logger;
+// logDamage = (damage: string) => console.log('Damage reported: ' + damage);
+// logDamage('coffee stains');
+
+// Task 04.03
+// let favoriteAuthor: Author = {
+//   email: 'Anna@gmail.com',
+//   name: 'Anna',
+//   numBooksPublished: 3
 // };
 
-// Task 10
-let favoriteLibrarian: Librarian = new UniversityLibrarian();
-favoriteLibrarian.name = 'Anna';
-favoriteLibrarian.assistCustomer('Boris');
+// let favoriteLibrarian: Librarian = {
+//   name: 'Boris',
+//   email: 'Boris@gmail.com',
+//   department: 'Classical Literature',
+//   assistCustomer: (name: string) => console.log(`Assist ${name}`)
+// };
 
-// Task 11
+// Task 04.04
+// const offer: any = {
+//   book: {
+//     title: 'Essential TypeScript'
+//   }
+// };
+
+// console.log(offer?.magazine);
+
+// Task 04.05
+// console.log(getBookProp(getAllBooks()[0], 'title'));        // Refactoring JavaScript
+// console.log(getBookProp(getAllBooks()[0], 'markDamaged'));  // undefined
+// console.log(getBookProp(getAllBooks()[0], 'isbn'));      // error
+
+// Task 05.01
 // let ref: ReferenceItem = new ReferenceItem('Updated Facts and Figures', 2016);
 // ref.printItem();
 // ref.publisher = 'Random Data Publishing';
 // console.log(ref.publisher);
 
+// Task 05.02
+// let refBook: ReferenceItem = new Encyclopedia('WorldPedia', 1900, 10);
+// refBook.printItem();
+
+// Task 05.03
+// let refBook: ReferenceItem = new Encyclopedia('WorldPedia', 1900, 10);
+// refBook.printCitation();
+
+// Task 05.04
+// let favoriteLibrarian: Librarian = new UniversityLibrarian();
+// favoriteLibrarian.name = 'Anna';
+// favoriteLibrarian.assistCustomer('Boris');
+
+// Task 05.05
+// const personBook: PersonBook = {
+//   name: 'Anna',
+//   email: 'anna@example.com',
+//   author: 'Boris',
+//   available: true,
+//   category: Category.HTML,
+//   id: 1,
+//   title: 'Introduction to HTML'
+// };
+// console.log(personBook);
+
+// Task 06.03
+// let refBook: ReferenceItem = new Encyclopedia('WorldPedia', 1900, 10);
 // let refBook: ReferenceItem = new RefBook('WorldPedia', 1900, 10);
 // refBook.printItem();
 
-// Task 12, 16
-// let refBook: ReferenceItem = new Encyclopedia('WorldPedia', 1900, 10);
-let refBook: ReferenceItem = new RefBook('WorldPedia', 1900, 10);
-refBook.printItem();
+// Task 06.05
+// import('./classes').then(module => {
+//     const reader = new module.Reader();
+//     console.log(reader);
+//     reader.name = 'Anna';
+//     reader.take(getAllBooks()[1]);
+// });
 
-// Task 13
-refBook.printCitation();
+// Task 07.01
+// let inventory: Array<Book> = [
+//     {
+//       id: 10,
+//       title: 'The C Programming Language',
+//       author: 'K & R',
+//       available: true,
+//       category: Category.Software
+//     },
+//     {
+//       id: 11,
+//       title: 'Code Complete',
+//       author: 'Steve McConnell',
+//       available: true,
+//       category: Category.Software
+//     },
+//     {
+//       id: 12,
+//       title: '8-Bit Graphics with Cobol',
+//       author: 'A. B.',
+//       available: true,
+//       category: Category.Software
+//     },
+//     {
+//       id: 13,
+//       title: 'Cool autoexec.bat Scripts!',
+//       author: 'C. D.',
+//       available: true,
+//       category: Category.Software
+//     }
+//   ];
 
-// Task 18
-let inventory: Array<Book> = [
-  {
-    id: 10,
-    title: 'The C Programming Language',
-    author: 'K & R',
-    available: true,
-    category: Category.Software
-  },
-  {
-    id: 11,
-    title: 'Code Complete',
-    author: 'Steve McConnell',
-    available: true,
-    category: Category.Software
-  },
-  {
-    id: 12,
-    title: '8-Bit Graphics with Cobol',
-    author: 'A. B.',
-    available: true,
-    category: Category.Software
-  },
-  {
-    id: 13,
-    title: 'Cool autoexec.bat Scripts!',
-    author: 'C. D.',
-    available: true,
-    category: Category.Software
-  }
-];
-let purgedBooks: Array<Book> = purge<Book>(inventory);
-purgedBooks.forEach(book => console.log(book.title));
+//   let purgedBooks: Array<Book> = purge<Book>(inventory);
+//   console.log(purgedBooks);
 
-let purgedNums: Array<number> = purge<number>([1, 2, 3, 4]);
-console.log(purgedNums);
+//   let purgedNums: Array<number> = purge<number>([1, 2, 3, 4]);
+//   console.log(purgedNums);
 
-// Task 19
-let bookShelf: Shelf<Book> = new Shelf<Book>();
-inventory.forEach(book => bookShelf.add(book));
-let firstBook: Book = bookShelf.getFirst();
-console.log(firstBook.title);
+// Task 07.02
+// let bookShelf: Shelf<Book> = new Shelf<Book>();
+// inventory.forEach(book => bookShelf.add(book));
+// let firstBook: Book = bookShelf.getFirst();
+// console.log(firstBook.title);
 
-let magazines: Array<Magazine> = [
-  { title: 'Programming Language Monthly', publisher: 'Code Mags' },
-  { title: 'Literary Fiction Quarterly', publisher: 'College Press' },
-  { title: 'Five Points', publisher: 'GSU' }
-];
-let magazineShelf: Shelf<Magazine> = new Shelf<Magazine>();
-magazines.forEach(mag => magazineShelf.add(mag));
-let firstMagazine: Magazine = magazineShelf.getFirst();
-console.log(firstMagazine.title);
+// let magazines: Array<Magazine> = [
+//   { title: 'Programming Language Monthly', publisher: 'Code Mags' },
+//   { title: 'Literary Fiction Quarterly', publisher: 'College Press' },
+//   { title: 'Five Points', publisher: 'GSU' }
+// ];
 
-// Task 20
-magazineShelf.printTitles();
-let softwareBook = bookShelf.find('Code Complete');
-console.log(`${softwareBook.title} (${softwareBook.author})`);
+// let magazineShelf: Shelf<Magazine> = new Shelf<Magazine>();
+// magazines.forEach(mag => magazineShelf.add(mag));
+// let firstMagazine: Magazine = magazineShelf.getFirst();
+// console.log(firstMagazine.title);
 
-// Task 22
+// Task 07.03
+// magazineShelf.printTitles();
+// let softwareBook = bookShelf.find('Code Complete');
+// console.log(`${softwareBook.title} (${softwareBook.author})`);
+
+// Task 07.04
+// const book: BookRequiredFields = {
+//   id: 1,
+//   title: 'Refactoring JavaScript',
+//   author: 'Evan Burchard',
+//   available: true,
+//   category: Category.JavaScript,
+//   markDamaged: null,
+//   pages: 200
+// };
+
+// const updatedBook: UpdatedBook = {
+//   id: 1,
+//   title: 'Refactoring JavaScript'
+// };
+
+
+// const params: Parameters<createCustomerFunctionType> = ['Anna'];
+// createCustomer(...params);
+
+// Task 08.01
+// let favoriteLibrarian: any = new UniversityLibrarian();
+
+// Task 08.02
 let fLibrarian = new UniversityLibrarian();
 fLibrarian.name = 'Anna';
 fLibrarian.assistCustomer('Boris');
 fLibrarian['printLibrarian']();
 console.log(fLibrarian);
+
