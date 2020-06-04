@@ -104,11 +104,6 @@ function calcTotalPages(): BigInt {
   return result;
 }
 
-function getBookByID(id: number) {
-  const books = getAllBooks();
-  return books.find(book => book.id === id);
-}
-
 function createCustomerID(name: string, id: number): string {
     return `${name}${id}`;
 }
@@ -127,10 +122,6 @@ function createCustomerID(name: string, id: number): string {
 // console.log(titleAndAuthor);
 
 // console.log(calcTotalPages());
-
-// Task 03.01
-// javaScriptBooks.forEach((val, idx, arr) => console.log(++idx + ' - ' + val));
-// console.log(getBookByID(1));
 
 // Task 03.02
 let myID = createCustomerID('Ann', 10);
