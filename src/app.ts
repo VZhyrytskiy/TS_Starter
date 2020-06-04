@@ -122,6 +122,12 @@ function createCustomer(name: string, age?: number, city?: string): void {
   }
 }
 
+function getBookByID(id: number): any {
+  const books = getAllBooks();
+  return books.find(book => book.id === id);
+}
+
+
 function сheckoutBooks(customer: string, ...bookIDs: number[]): string[] {
   console.log(`Checking out books for ${customer}`);
 
@@ -164,14 +170,19 @@ function сheckoutBooks(customer: string, ...bookIDs: number[]): string[] {
 // console.log(myID);
 
 // Task 03.03
+
+
 createCustomer('Ann');
 createCustomer('Boris', 6);
 createCustomer('Clara', 12, 'Atlanta');
+
 
 const titles = getBookTitlesByCategory();
 console.log(titles);
 
 logFirstAvailable();
+
+console.log(getBookByID(1));
 
 let myBooks: string[] = сheckoutBooks('Ann', 1, 3, 4);
 console.log(myBooks);
