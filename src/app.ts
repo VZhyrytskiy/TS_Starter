@@ -114,11 +114,6 @@ function logBookTitles(titles: string[]): void {
   }
 }
 
-function getBookByID(id: number): Book | undefined {
-  const allBooks = getAllBooks();
-  return allBooks.find(book => book.id === id);
-}
-
 function getBookAuthorByIndex(index: number): [string, string] {
   const books = getAllBooks();
   const { title, author } = books[index];
@@ -139,7 +134,6 @@ function getBookAuthorByIndex(index: number): [string, string] {
 //   return result;
 // }
 
-
 function createCustomerID(name: string, id: number): string {
   return `${name}${id}`;
 }
@@ -155,6 +149,12 @@ function createCustomer(name: string, age?: number, city?: string): void {
     console.log(`City: ${city}`);
   }
 }
+
+function getBookByID(id: number): any {
+  const books = getAllBooks();
+  return books.find(book => book.id === id);
+}
+
 
 function сheckoutBooks(customer: string, ...bookIDs: number[]): string[] {
   console.log(`Checking out books for ${customer}`);
@@ -231,10 +231,6 @@ function bookTitleTransform(title: any) {
 
 // console.log(calcTotalPages());
 
-// Task 03.01
-// javaScriptBooks.forEach((val, idx, arr) => console.log(++idx + ' - ' + val));
-// console.log(getBookByID(1));
-
 // Task 03.02
 // let myID = createCustomerID('Ann', 10);
 // console.log(myID);
@@ -255,6 +251,7 @@ function bookTitleTransform(title: any) {
 // console.log(titles);
 
 // logFirstAvailable();
+// console.log(getBookByID(1));
 
 // let myBooks: string[] = сheckoutBooks('Ann', 1, 3, 4);
 // console.log(myBooks);
