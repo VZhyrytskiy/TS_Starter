@@ -141,9 +141,19 @@ import { assertStringValue, getAllBooks, bookTitleTransform, createCustomer, cre
 // refBook.printItem();
 
 // Task 06.05
-import('./classes').then(module => {
-    const reader = new module.Reader();
-    console.log(reader);
-    reader.name = 'Anna';
-    reader.take(getAllBooks()[1]);
-});
+// import('./classes').then(module => {
+//     const reader = new module.Reader();
+//     console.log(reader);
+//     reader.name = 'Anna';
+//     reader.take(getAllBooks()[1]);
+// });
+
+// Task 06.06
+import type { Library } from './classes';
+// const lib: Library = new Library();
+const lib: Library = {
+    id: 1,
+    name: 'Vernadsky National Library of Ukraine',
+    address: 'Kyiv,  Holosiivskyi Avenue, 3'
+};
+console.log(lib);
