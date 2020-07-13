@@ -148,6 +148,16 @@ import { assertStringValue, getAllBooks, bookTitleTransform, createCustomer, cre
 //     reader.take(getAllBooks()[1]);
 // });
 
+// Task 06.06
+import type { Library } from './classes';
+// const lib: Library = new Library();
+const lib: Library = {
+    id: 1,
+    name: 'Vernadsky National Library of Ukraine',
+    address: 'Kyiv,  Holosiivskyi Avenue, 3'
+};
+console.log(lib);
+
 // Task 07.01
 let inventory: Array<Book> = [
     {
@@ -185,3 +195,4 @@ let inventory: Array<Book> = [
 
   let purgedNums: Array<number> = purge<number>([1, 2, 3, 4]);
   console.log(purgedNums);
+
