@@ -41,6 +41,10 @@ abstract class ReferenceItem {
     this._publisher = newPublisher;
   }
 
+  getID(): number {
+    return this.#id;
+  }
+
   abstract printCitation(): void;
 }
 
