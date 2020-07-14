@@ -1,11 +1,18 @@
+function showHello(divName: string, name: string) {
+  const elt = document.getElementById(divName);
+  elt.innerText = `Hello from ${name}`;
+}
+
+showHello('greeting', 'TypeScript');
+
 import { Category } from './enums';
 import { Book, Logger, Author, Librarian } from './interfaces';
 import { UniversityLibrarian, ReferenceItem } from './classes';
 import { assertStringValue, getAllBooks, bookTitleTransform, createCustomer, createCustomerID, getBookAuthorByIndex, getBookByID, getBookProp, getBookTitlesByCategory, getTitles, logBookTitles, logFirstAvailable, printBook, сheckoutBooks } from './functions';
 
 class Encyclopedia extends ReferenceItem {
-  constructor(newTitle: string, newYear: number, public edition: number) {
-    super(newTitle, newYear);
+  constructor(id: number, newTitle: string, newYear: number, public edition: number) {
+    super(id, newTitle, newYear);
   }
 
   printItem(): void {
@@ -120,17 +127,19 @@ class Encyclopedia extends ReferenceItem {
 // console.log(getBookProp(getAllBooks()[0], 'isbn'));      // error
 
 // Task 05.01
-// let ref: ReferenceItem = new ReferenceItem('Updated Facts and Figures', 2016);
+// let ref: ReferenceItem = new ReferenceItem(1, 'Updated Facts and Figures', 2016);
 // ref.printItem();
 // ref.publisher = 'Random Data Publishing';
 // console.log(ref.publisher);
+// console.log(ref);
+// console.log(ref.getID());
 
 // Task 05.02
-// let refBook: ReferenceItem = new Encyclopedia('WorldPedia', 1900, 10);
+// let refBook: ReferenceItem = new Encyclopedia(1, 'WorldPedia', 1900, 10);
 // refBook.printItem();
 
 // Task 05.03
-// let refBook: ReferenceItem = new Encyclopedia('WorldPedia', 1900, 10);
+// let refBook: ReferenceItem = new Encyclopedia(1, 'WorldPedia', 1900, 10);
 // refBook.printCitation();
 
 // Task 05.04
