@@ -1,8 +1,8 @@
 import { ReferenceItem } from './reference-item';
 
 export default class Encyclopedia extends ReferenceItem {
-  constructor(newTitle: string, newYear: number, public edition: number) {
-    super(newTitle, newYear);
+  constructor(id: number, newTitle: string, newYear: number, public edition: number) {
+    super(id, newTitle, newYear);
   }
 
   printItem(): void {
