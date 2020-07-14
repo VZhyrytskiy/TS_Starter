@@ -1,17 +1,6 @@
-import { ReferenceItem } from './reference-item';
-import { positiveInteger } from './../decorators';
+import { ReferenceItem } from './classes';
 
 export default class Encyclopedia extends ReferenceItem {
-  private _copies: number;
-  @positiveInteger
-  get copies(): number {
-    return this._copies;
-  }
-
-  set copies(value: number) {
-    this._copies = value;
-  }
-
   constructor(id: number, newTitle: string, newYear: number, public edition: number) {
     super(id, newTitle, newYear);
   }
