@@ -1,6 +1,7 @@
 export abstract class ReferenceItem {
   // title: string;
   // year: number;
+  #id: number;
   private _publisher: string;
   static department: string = 'Research';
 
@@ -10,8 +11,9 @@ export abstract class ReferenceItem {
   //     this.year = newYear;
   // }
 
-  constructor(public title: string, protected year: number) {
+  constructor(id: number, public title: string, protected year: number) {
     console.log('Creating a new ReferenceItem...');
+    this.#id = id;
   }
 
   printItem(): void {
@@ -25,6 +27,10 @@ export abstract class ReferenceItem {
 
   set publisher(newPublisher: string) {
     this._publisher = newPublisher;
+  }
+
+  getID(): number {
+    return this.#id;
   }
 
   abstract printCitation(): void;
