@@ -270,5 +270,5 @@ console.log(lib);
 // lib.teachCommunity();
 
 // Task 08.04
-const enc = new Encyclopedia('Title', 2018, 3);
+const enc = new Encyclopedia(1, 'Title', 2018, 3);
 enc.printItem();
