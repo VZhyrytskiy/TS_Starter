@@ -286,6 +286,6 @@ console.log(lib);
 // l.assistCustomer('Boris');
 
 // Task 08.07
-// const e = new Encyclopedia('title', 2018, 3);
+// const e = new Encyclopedia(1, 'title', 2018, 3);
 // e.copies = 13;
 // console.log(e.copies);
