@@ -1,3 +1,10 @@
+function showHello(divName: string, name: string) {
+  const elt = document.getElementById(divName);
+  elt.innerText = `Hello from ${name}`;
+}
+
+showHello('greeting', 'TypeScript');
+
 import { Category } from './enums';
 import { Book, Logger, Author, Librarian, Magazine } from './interfaces';
 import { UniversityLibrarian, ReferenceItem, RefBook, Shelf } from './classes';
@@ -20,10 +27,6 @@ import Encyclopedia from './classes/encyclopedia';
 
 // console.log(calcTotalPages());
 
-// Task 03.01
-// javaScriptBooks.forEach((val, idx, arr) => console.log(++idx + ' - ' + val));
-// console.log(getBookByID(1));
-
 // Task 03.02
 // let myID = createCustomerID('Ann', 10);
 // console.log(myID);
@@ -44,6 +47,7 @@ import Encyclopedia from './classes/encyclopedia';
 // console.log(titles);
 
 // logFirstAvailable();
+// console.log(getBookByID(1));
 
 // let myBooks: string[] = сheckoutBooks('Ann', 1, 3, 4);
 // console.log(myBooks);
@@ -107,17 +111,19 @@ import Encyclopedia from './classes/encyclopedia';
 // console.log(getBookProp(getAllBooks()[0], 'isbn'));      // error
 
 // Task 05.01
-// let ref: ReferenceItem = new ReferenceItem('Updated Facts and Figures', 2016);
+// let ref: ReferenceItem = new ReferenceItem(1, 'Updated Facts and Figures', 2016);
 // ref.printItem();
 // ref.publisher = 'Random Data Publishing';
 // console.log(ref.publisher);
+// console.log(ref);
+// console.log(ref.getID());
 
 // Task 05.02
-// let refBook: ReferenceItem = new Encyclopedia('WorldPedia', 1900, 10);
+// let refBook: ReferenceItem = new Encyclopedia(1, 'WorldPedia', 1900, 10);
 // refBook.printItem();
 
 // Task 05.03
-// let refBook: ReferenceItem = new Encyclopedia('WorldPedia', 1900, 10);
+// let refBook: ReferenceItem = new Encyclopedia(1, 'WorldPedia', 1900, 10);
 // refBook.printCitation();
 
 // Task 05.04
@@ -139,8 +145,8 @@ import Encyclopedia from './classes/encyclopedia';
 
 // Task 06.03
 // let refBook: ReferenceItem = new Encyclopedia('WorldPedia', 1900, 10);
-// let refBook: ReferenceItem = new RefBook('WorldPedia', 1900, 10);
-// refBook.printItem();
+let refBook: ReferenceItem = new RefBook(1, 'WorldPedia', 1900, 10);
+refBook.printItem();
 
 // Task 06.05
 // import('./classes').then(module => {
