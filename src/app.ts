@@ -228,6 +228,7 @@ function bookTitleTransform(title: any) {
 class ReferenceItem {
   // title: string;
   // year: number;
+  #id: number;
   private _publisher: string;
   static department: string = 'Research';
 
@@ -237,8 +238,13 @@ class ReferenceItem {
   //     this.year = newYear;
   // }
 
-  constructor(public title: string, protected year: number) {
+  constructor(id: number, public title: string, protected year: number) {
     console.log('Creating a new ReferenceItem...');
+    this.#id = id;
+  }
+
+  getID(): number {
+    return this.#id;
   }
 
   printItem(): void {
@@ -256,8 +262,8 @@ class ReferenceItem {
 }
 
 class Encyclopedia extends ReferenceItem {
-  constructor(newTitle: string, newYear: number, public edition: number) {
-    super(newTitle, newYear);
+  constructor(id: number, newTitle: string, newYear: number, public edition: number) {
+    super(id, newTitle, newYear);
   }
 
   printItem(): void {
@@ -365,11 +371,13 @@ class Encyclopedia extends ReferenceItem {
 // console.log(getBookProp(getAllBooks()[0], 'isbn'));      // error
 
 // Task 05.01
-// let ref: ReferenceItem = new ReferenceItem('Updated Facts and Figures', 2016);
+// let ref: ReferenceItem = new ReferenceItem(1, 'Updated Facts and Figures', 2016);
 // ref.printItem();
 // ref.publisher = 'Random Data Publishing';
 // console.log(ref.publisher);
+// console.log(ref);
+// console.log(ref.getID());
 
 // Task 05.02
-let refBook: ReferenceItem = new Encyclopedia('WorldPedia', 1900, 10);
+let refBook: ReferenceItem = new Encyclopedia(1, 'WorldPedia', 1900, 10);
 refBook.printItem();
