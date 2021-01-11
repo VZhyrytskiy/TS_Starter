@@ -9,7 +9,6 @@ export function getBookProp(book: Book, prop: BookProperties): any {
     return book[prop];
 }
 
-
 export function getAllBooks(): readonly Book[] {
     let books: readonly Book[] = <const>[
         {
@@ -17,29 +16,29 @@ export function getAllBooks(): readonly Book[] {
             title: 'Refactoring JavaScript',
             author: 'Evan Burchard',
             available: true,
-            category: Category.JavaScript
+            category: Category.JavaScript,
         },
         {
             id: 2,
             title: 'JavaScript Testing',
             author: 'Liang Yuxian Eugene',
             available: false,
-            category: Category.JavaScript
+            category: Category.JavaScript,
         },
         {
             id: 3,
             title: 'CSS Secrets',
             author: 'Lea Verou',
             available: true,
-            category: Category.CSS
+            category: Category.CSS,
         },
         {
             id: 4,
             title: 'Mastering JavaScript Object-Oriented Programming',
             author: 'Andrea Chiarelli',
             available: true,
-            category: Category.JavaScript
-        }
+            category: Category.JavaScript,
+        },
     ];
 
     return books;
@@ -60,9 +59,7 @@ export function logFirstAvailable(books: readonly any[] = getAllBooks()): void {
     console.log(`First Available Book: ${firstAvailableBookTitle}`);
 }
 
-export function getBookTitlesByCategory(
-    categoryFilter: Category = Category.JavaScript
-): Array<string> {
+export function getBookTitlesByCategory(categoryFilter: Category = Category.JavaScript): Array<string> {
     console.log(`Getting books in category: ${Category[categoryFilter]}`);
 
     const allBooks = getAllBooks();
@@ -108,7 +105,6 @@ export function getBookAuthorByIndex(index: number): [string, string] {
 //   return result;
 // }
 
-
 export function createCustomerID(name: string, id: number): string {
     return `${name}${id}`;
 }
@@ -147,18 +143,15 @@ export function getTitles(...args: any[]): string[] {
     const books = getAllBooks();
     if (args.length === 0) {
         return [];
-    }
-    else if (args.length === 1) {
+    } else if (args.length === 1) {
         const arg = args[0];
 
         if (typeof arg === 'string') {
             return books.filter(book => book.author === arg).map(book => book.title);
-        }
-        else if (typeof arg === 'boolean') {
+        } else if (typeof arg === 'boolean') {
             return books.filter(book => book.available === arg).map(book => book.title);
         }
-    }
-    else if (args.length === 2) {
+    } else if (args.length === 2) {
         const id = args[0];
         const available = args[1];
 
