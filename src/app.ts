@@ -133,4 +133,3 @@ IdGenerator = (name: string, id: number) => `${name}${id}`;
 IdGenerator = createCustomerID;
 myID = IdGenerator('Ann', 20);
 console.log(myID);
-
