@@ -1,6 +1,7 @@
+/* eslint-disable no-redeclare */
 function showHello(divName: string, name: string) {
-  const elt = document.getElementById(divName);
-  elt.innerText = `Hello from ${name}`;
+    const elt = document.getElementById(divName);
+    elt.innerText = `Hello from ${name}`;
 }
 
 showHello('greeting', 'TypeScript');
@@ -8,25 +9,37 @@ showHello('greeting', 'TypeScript');
 import { Category } from './enums';
 import { Book, Logger, Author, Librarian } from './interfaces';
 import { UniversityLibrarian, ReferenceItem } from './classes';
-import { assertStringValue, getAllBooks, bookTitleTransform, createCustomer, createCustomerID, getBookAuthorByIndex, getBookByID, getBookProp, getBookTitlesByCategory, getTitles, logBookTitles, logFirstAvailable, printBook, сheckoutBooks } from './functions';
+import {
+    assertStringValue,
+    getAllBooks,
+    bookTitleTransform,
+    createCustomer,
+    createCustomerID,
+    getBookAuthorByIndex,
+    getBookByID,
+    getBookProp,
+    getBookTitlesByCategory,
+    getTitles,
+    logBookTitles,
+    logFirstAvailable,
+    printBook,
+    сheckoutBooks,
+} from './functions';
 
 class Encyclopedia extends ReferenceItem {
-  constructor(id: number, newTitle: string, newYear: number, public edition: number) {
-    super(id, newTitle, newYear);
-  }
+    constructor(id: number, newTitle: string, newYear: number, public edition: number) {
+        super(id, newTitle, newYear);
+    }
 
-  printItem(): void {
-    super.printItem();
-    console.log(`Edition: ${this.edition} (${this.year})`);
-  }
+    printItem(): void {
+        super.printItem();
+        console.log(`Edition: ${this.edition} (${this.year})`);
+    }
 
-  printCitation(): void {
-    console.log(`${this.title} - ${this.year}`);
-  }
+    printCitation(): void {
+        console.log(`${this.title} - ${this.year}`);
+    }
 }
-
-
-
 
 // ---------------------------------------------
 // Task 02.01
@@ -158,5 +171,3 @@ class Encyclopedia extends ReferenceItem {
 //   title: 'Introduction to HTML'
 // };
 // console.log(personBook);
-
-
