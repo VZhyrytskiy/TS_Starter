@@ -220,56 +220,56 @@ function bookTitleTransform(title: any) {
 }
 
 abstract class ReferenceItem {
-  // title: string;
-  // year: number;
-  #id: number;
-  private _publisher: string;
-  static department: string = 'Research';
+    // title: string;
+    // year: number;
+    #id: number;
+    private _publisher: string;
+    static department: string = 'Research';
 
-  // constructor(newTitle: string, newYear: number) {
-  //     console.log('Creating a new ReferenceItem...');
-  //     this.title = newTitle;
-  //     this.year = newYear;
-  // }
+    // constructor(newTitle: string, newYear: number) {
+    //     console.log('Creating a new ReferenceItem...');
+    //     this.title = newTitle;
+    //     this.year = newYear;
+    // }
 
-  constructor(id: number, public title: string, protected year: number) {
-    console.log('Creating a new ReferenceItem...');
-    this.#id = id;
-  }
+    constructor(id: number, public title: string, protected year: number) {
+        console.log('Creating a new ReferenceItem...');
+        this.#id = id;
+    }
 
-  getID(): number {
-    return this.#id;
-  }
+    getID(): number {
+        return this.#id;
+    }
 
-  printItem(): void {
-    console.log(`${this.title} was published in ${this.year}.`);
-    console.log(`Department: ${ReferenceItem.department}`);
-  }
+    printItem(): void {
+        console.log(`${this.title} was published in ${this.year}.`);
+        console.log(`Department: ${ReferenceItem.department}`);
+    }
 
-  get publisher(): string {
-    return this._publisher.toUpperCase();
-  }
+    get publisher(): string {
+        return this._publisher.toUpperCase();
+    }
 
-  set publisher(newPublisher: string) {
-    this._publisher = newPublisher;
-  }
+    set publisher(newPublisher: string) {
+        this._publisher = newPublisher;
+    }
 
-  abstract printCitation(): void;
+    abstract printCitation(): void;
 }
 
 class Encyclopedia extends ReferenceItem {
-  constructor(id: number, newTitle: string, newYear: number, public edition: number) {
-    super(id, newTitle, newYear);
-  }
+    constructor(id: number, newTitle: string, newYear: number, public edition: number) {
+        super(id, newTitle, newYear);
+    }
 
-  printItem(): void {
-    super.printItem();
-    console.log(`Edition: ${this.edition} (${this.year})`);
-  }
+    printItem(): void {
+        super.printItem();
+        console.log(`Edition: ${this.edition} (${this.year})`);
+    }
 
-  printCitation(): void {
-    console.log(`${this.title} - ${this.year}`);
-  }
+    printCitation(): void {
+        console.log(`${this.title} - ${this.year}`);
+    }
 }
 
 // ---------------------------------------------
