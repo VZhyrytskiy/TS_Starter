@@ -2,7 +2,7 @@ import { Book } from './interfaces';
 import { BookProperties, BookOrUndefined } from './types';
 import { Category } from './enums';
 
-export function getBookProp(book: Book, prop: BookProperties): any {
+export function getProperty(book: Book, prop: BookProperties): any {
     if (typeof book[prop] === 'function') {
         return (book[prop] as Function).name;
     }
