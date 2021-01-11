@@ -63,19 +63,12 @@ function logFirstAvailable(books: readonly any[] = getAllBooks()): void {
     }
 }
 
-function getBookTitlesByCategory(categoryFilter: Category = Category.JavaScript): Array<string> {
-    console.log(`Getting books in category: ${Category[categoryFilter]}`);
+function getBookTitlesByCategory(category: Category = Category.JavaScript): Array<string> {
+    console.log(`Getting books in category: ${Category[category]}`);
 
-    const allBooks = getAllBooks();
-    const filteredTitles: string[] = [];
-
-    for (let currentBook of allBooks) {
-        if (currentBook.category === categoryFilter) {
-            filteredTitles.push(currentBook.title);
-        }
-    }
-
-    return filteredTitles;
+    return getAllBooks()
+        .filter(book => book['category'] === category)
+        .map(book => book['title']);
 }
 
 function logBookTitles(titles: string[]): void {
@@ -128,16 +121,14 @@ function getBookByID(id: number): any {
 function сheckoutBooks(customer: string, ...bookIDs: number[]): string[] {
     console.log(`Checking out books for ${customer}`);
 
-    let booksCheckedOut: string[] = [];
+    let titles: string[] = [];
 
-    for (let id of bookIDs) {
-        let book = getBookByID(id);
-        if (book && book.available) {
-            booksCheckedOut.push(book.title);
-        }
-    }
+    bookIDs.forEach(id => {
+        const book = getBookByID(id);
+        if (book?.available) titles.push(book.title);
+    });
 
-    return booksCheckedOut;
+    return titles;
 }
 
 // ---------------------------------------------
