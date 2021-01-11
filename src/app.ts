@@ -119,11 +119,14 @@ import {
 // };
 
 // console.log(offer?.magazine);
+// console.log(offer?.magazine?.getTitle());
+// console.log(offer?.book?.getTitle?.());
+// console.log(offer.book.authors?.[0]);
 
 // Task 04.05
-// console.log(getBookProp(getAllBooks()[0], 'title'));        // Refactoring JavaScript
-// console.log(getBookProp(getAllBooks()[0], 'markDamaged'));  // undefined
-// console.log(getBookProp(getAllBooks()[0], 'isbn'));      // error
+// console.log(getProperty(getAllBooks()[0], 'title'));        // Refactoring JavaScript
+// console.log(getProperty(getAllBooks()[0], 'markDamaged'));  // undefined
+// console.log(getProperty(getAllBooks()[0], 'isbn'));      // error
 
 // Task 05.01
 // let ref: ReferenceItem = new ReferenceItem(1, 'Updated Facts and Figures', 2016);
