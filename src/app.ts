@@ -90,7 +90,7 @@ function getBookAuthorByIndex(index: number): [string, string] {
     return [title, author];
 }
 
-function calcTotalPages(): BigInt {
+function calcTotalPages(): bigint {
     const data = <const>[
         { lib: 'libName1', books: 1_000_000_000, avgPagesPerBook: 250 },
         { lib: 'libName2', books: 5_000_000_000, avgPagesPerBook: 300 },
