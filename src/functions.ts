@@ -2,11 +2,11 @@ import { Book, LibMgrCallback } from './interfaces';
 import { BookProperties, BookOrUndefined } from './types';
 import { Category } from './enums';
 
-export function getBookProp(book: Book, prop: BookProperties): any {
-    if (typeof book[prop] === 'function') {
-        return (book[prop] as Function).name;
+export function getProperty<TObject, TKey extends keyof TObject>(obj: TObject, prop: TKey): TObject[TKey] | string {
+    if (typeof obj[prop] === 'function') {
+        return obj[prop]['name'];
     }
-    return book[prop];
+    return obj[prop];
 }
 
 export function getAllBooks(): readonly Book[] {
@@ -181,16 +181,61 @@ export function purge<T>(inventory: Array<T>): Array<T> {
     return inventory.slice(2);
 }
 
-export function getBooksByCategory(category: Category, callback: LibMgrCallback): void {
+export function makeProperty<T>(
+    prototype: any,
+    propertyName: string,
+    getTransformer: (value: any) => T,
+    setTransformer: (value: any) => T,
+) {
+    // меп для хранения данных для каждого экземпляра
+    const values = new Map<any, T>();
 
+    // на прототипе определяем setter
+    // этот сетер запуститься,
+    // когда первый раз будем устанавливать значение свойства экземпляра,
+    // так как на экземпляре не будет сетера для свойства,
+    // то будет использоваться сетер из прототипа
+    Object.defineProperty(prototype, propertyName, {
+        set(firstValue: any) {
+            // внутри сетера есть доступ к this - это и будет экземпляр класса
+            // на экземпляре определяем getter & setter для сойства
+            Object.defineProperty(this, propertyName, {
+                // getter берет значение из мепа для текущего экземпляра
+                get() {
+                    if (getTransformer) {
+                        return getTransformer(values.get(this));
+                    } else {
+                        values.get(this);
+                    }
+                },
+                // setter записывает значение для текущего экземпляра в меп,
+                // при этом вызывает еще функцию преобразования значения
+                set(value: any) {
+                    if (setTransformer) {
+                        values.set(this, setTransformer(value));
+                    } else {
+                        values.set(this, value);
+                    }
+                },
+                // устанавливаем, что свойство перечисляемое
+                enumerable: true,
+            });
+            // Установка итогового значения на экземпляре
+            this[propertyName] = firstValue;
+        },
+        enumerable: true,
+        configurable: true,
+    });
+}
+
+export function getBooksByCategory(category: Category, callback: LibMgrCallback): void {
     setTimeout(() => {
         try {
             let foundBooks: string[] = getBookTitlesByCategory(category);
 
             if (foundBooks.length > 0) {
                 callback(null, foundBooks);
-            }
-            else {
+            } else {
                 throw new Error('No books found.');
             }
         } catch (error) {
@@ -202,10 +247,8 @@ export function getBooksByCategory(category: Category, callback: LibMgrCallback)
 export function logCategorySearch(err: Error, titles: string[]): void {
     if (err) {
         console.log(`Error message: ${err.message}`);
-    }
-    else {
+    } else {
         console.log(`Found the following titles:`);
         console.log(titles);
     }
 }
-
