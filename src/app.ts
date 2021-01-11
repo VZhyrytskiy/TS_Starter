@@ -29,17 +29,17 @@ interface DamageLogger {
 }
 
 interface Person {
-  name: string;
-  email: string;
+    name: string;
+    email: string;
 }
 
 interface Author extends Person {
-  numBooksPublished: number;
+    numBooksPublished: number;
 }
 
 interface Librarian extends Person {
-  department: string;
-  assistCustomer: (custName: string) => void;
+    department: string;
+    assistCustomer: (custName: string) => void;
 }
 
 function getAllBooks(): readonly Book[] {
@@ -282,14 +282,14 @@ function bookTitleTransform(title: any) {
 
 // Task 04.03
 let favoriteAuthor: Author = {
-  email: 'Anna@gmail.com',
-  name: 'Anna',
-  numBooksPublished: 3
+    email: 'Anna@gmail.com',
+    name: 'Anna',
+    numBooksPublished: 3,
 };
 
 let favoriteLibrarian: Librarian = {
-  name: 'Boris',
-  email: 'Boris@gmail.com',
-  department: 'Classical Literature',
-  assistCustomer: (name: string) => console.log(`Assist ${name}`)
+    name: 'Boris',
+    email: 'Boris@gmail.com',
+    department: 'Classical Literature',
+    assistCustomer: (name: string) => console.log(`Assist ${name}`),
 };
