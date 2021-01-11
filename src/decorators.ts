@@ -1,3 +1,5 @@
+import { makeProperty } from './functions';
+
 export function sealed(name: string) {
   return function(target: Function): void {
     console.log(`Sealing the constructor: ${name}`);
@@ -102,52 +104,7 @@ export function logMethod(
   return descriptor;
 }
 
-function makeProperty<T>(
-  prototype: any,
-  propertyName: string,
-  getTransformer: (value: any) => T,
-  setTransformer: (value: any) => T
-) {
-  // меп для хранения данных для каждого экземпляра
-  const values = new Map<any, T>();
 
-  // на прототипе определяем setter
-  // этот сетер запуститься,
-  // когда первый раз будем устанавливать значение свойства экземпляра,
-  // так как на экземпляре не будет сетера для свойства,
-  // то будет использоваться сетер из прототипа
-  Object.defineProperty(prototype, propertyName, {
-    set(firstValue: any) {
-      // внутри сетера есть доступ к this - это и будет экземпляр класса
-      // на экземпляре определяем getter & setter для сойства
-      Object.defineProperty(this, propertyName, {
-        // getter берет значение из мепа для текущего экземпляра
-        get() {
-          if (getTransformer) {
-            return getTransformer(values.get(this));
-          } else {
-            values.get(this);
-          }
-        },
-        // setter записывает значение для текущего экземпляра в меп,
-        // при этом вызывает еще функцию преобразования значения
-        set(value: any) {
-          if (setTransformer) {
-            values.set(this, setTransformer(value));
-          } else {
-            values.set(this, value);
-          }
-        },
-        // устанавливаем, что свойство перечисляемое
-        enumerable: true
-      });
-      // Установка итогового значения на экземпляре
-      this[propertyName] = firstValue;
-    },
-    enumerable: true,
-    configurable: true
-  });
-}
 
 // property decorator factory
 export function format(pref: string = 'Mr./Mrs.') {
