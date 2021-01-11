@@ -1,6 +1,7 @@
+/* eslint-disable no-redeclare */
 function showHello(divName: string, name: string) {
-  const elt = document.getElementById(divName);
-  elt.innerText = `Hello from ${name}`;
+    const elt = document.getElementById(divName);
+    elt.innerText = `Hello from ${name}`;
 }
 
 showHello('greeting', 'TypeScript');
@@ -8,7 +9,22 @@ showHello('greeting', 'TypeScript');
 import { Category } from './enums';
 import { Book, Logger, Author, Librarian } from './interfaces';
 import { UniversityLibrarian, ReferenceItem, RefBook } from './classes';
-import { assertStringValue, getAllBooks, bookTitleTransform, createCustomer, createCustomerID, getBookAuthorByIndex, getBookByID, getBookProp, getBookTitlesByCategory, getTitles, logBookTitles, logFirstAvailable, printBook, сheckoutBooks } from './functions';
+import {
+    assertStringValue,
+    getAllBooks,
+    bookTitleTransform,
+    createCustomer,
+    createCustomerID,
+    getBookAuthorByIndex,
+    getBookByID,
+    getBookProp,
+    getBookTitlesByCategory,
+    getTitles,
+    logBookTitles,
+    logFirstAvailable,
+    printBook,
+    сheckoutBooks,
+} from './functions';
 
 // ---------------------------------------------
 // Task 02.01
