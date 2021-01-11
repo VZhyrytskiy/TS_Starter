@@ -1,206 +1,199 @@
 function showHello(divName: string, name: string) {
-  const elt = document.getElementById(divName);
-  elt.innerText = `Hello from ${name}`;
+    const elt = document.getElementById(divName);
+    elt.innerText = `Hello from ${name}`;
 }
 
 showHello('greeting', 'TypeScript');
 
 enum Category {
-  JavaScript,
-  CSS,
-  HTML,
-  TypeScript,
-  Angular2
+    JavaScript,
+    CSS,
+    HTML,
+    TypeScript,
+    Angular2,
 }
 
 interface Book {
-  id: number;
-  title: string;
-  author: string;
-  available: boolean;
-  category: Category;
-  pages?: number;
-  markDamaged?: DamageLogger;
+    id: number;
+    title: string;
+    author: string;
+    available: boolean;
+    category: Category;
+    pages?: number;
+    markDamaged?: DamageLogger;
 }
 
 interface DamageLogger {
-  (reason: string): void;
+    (reason: string): void;
 }
 
 function getAllBooks(): readonly Book[] {
-  let books: readonly Book[] = <const>[
-    {
-      id: 1,
-      title: 'Refactoring JavaScript',
-      author: 'Evan Burchard',
-      available: true,
-      category: Category.JavaScript
-    },
-    {
-      id: 2,
-      title: 'JavaScript Testing',
-      author: 'Liang Yuxian Eugene',
-      available: false,
-      category: Category.JavaScript
-    },
-    {
-      id: 3,
-      title: 'CSS Secrets',
-      author: 'Lea Verou',
-      available: true,
-      category: Category.CSS
-    },
-    {
-      id: 4,
-      title: 'Mastering JavaScript Object-Oriented Programming',
-      author: 'Andrea Chiarelli',
-      available: true,
-      category: Category.JavaScript
-    }
-  ];
+    let books: readonly Book[] = <const>[
+        {
+            id: 1,
+            title: 'Refactoring JavaScript',
+            author: 'Evan Burchard',
+            available: true,
+            category: Category.JavaScript,
+        },
+        {
+            id: 2,
+            title: 'JavaScript Testing',
+            author: 'Liang Yuxian Eugene',
+            available: false,
+            category: Category.JavaScript,
+        },
+        {
+            id: 3,
+            title: 'CSS Secrets',
+            author: 'Lea Verou',
+            available: true,
+            category: Category.CSS,
+        },
+        {
+            id: 4,
+            title: 'Mastering JavaScript Object-Oriented Programming',
+            author: 'Andrea Chiarelli',
+            available: true,
+            category: Category.JavaScript,
+        },
+    ];
 
-  return books;
+    return books;
 }
 
 function logFirstAvailable(books: readonly any[] = getAllBooks()): void {
-  let numberOfBooks: number = books.length;
-  let firstAvailableBookTitle: string = '';
+    let numberOfBooks: number = books.length;
+    let firstAvailableBookTitle: string = '';
 
-  for (let currentBook of books) {
-    if (currentBook.available) {
-      firstAvailableBookTitle = currentBook.title;
-      break;
+    for (let currentBook of books) {
+        if (currentBook.available) {
+            firstAvailableBookTitle = currentBook.title;
+            break;
+        }
+
+        console.log(`Total Books: ${numberOfBooks}`);
+        console.log(`First Available Book: ${firstAvailableBookTitle}`);
     }
-  }
-
-  console.log(`Total Books: ${numberOfBooks}`);
-  console.log(`First Available Book: ${firstAvailableBookTitle}`);
 }
 
-function getBookTitlesByCategory(
-  categoryFilter: Category = Category.JavaScript
-): Array<string> {
-  console.log(`Getting books in category: ${Category[categoryFilter]}`);
+function getBookTitlesByCategory(categoryFilter: Category = Category.JavaScript): Array<string> {
+    console.log(`Getting books in category: ${Category[categoryFilter]}`);
 
-  const allBooks = getAllBooks();
-  const filteredTitles: string[] = [];
+    const allBooks = getAllBooks();
+    const filteredTitles: string[] = [];
 
-  for (let currentBook of allBooks) {
-    if (currentBook.category === categoryFilter) {
-      filteredTitles.push(currentBook.title);
+    for (let currentBook of allBooks) {
+        if (currentBook.category === categoryFilter) {
+            filteredTitles.push(currentBook.title);
+        }
     }
-  }
 
-  return filteredTitles;
+    return filteredTitles;
 }
 
 function logBookTitles(titles: string[]): void {
-  for (let title of titles) {
-    console.log(title);
-  }
+    for (let title of titles) {
+        console.log(title);
+    }
 }
 
 function getBookAuthorByIndex(index: number): [string, string] {
-  const books = getAllBooks();
-  const { title, author } = books[index];
-  return [title, author];
+    const books = getAllBooks();
+    const { title, author } = books[index];
+    return [title, author];
 }
 
 function calcTotalPages(): BigInt {
-  const data = <const>[
-    { lib: 'libName1', books: 1_000_000_000, avgPagesPerBook: 250 },
-    { lib: 'libName2', books: 5_000_000_000, avgPagesPerBook: 300 },
-    { lib: 'libName3', books: 3_000_000_000, avgPagesPerBook: 280 }
-  ];
+    const data = <const>[
+        { lib: 'libName1', books: 1_000_000_000, avgPagesPerBook: 250 },
+        { lib: 'libName2', books: 5_000_000_000, avgPagesPerBook: 300 },
+        { lib: 'libName3', books: 3_000_000_000, avgPagesPerBook: 280 },
+    ];
 
-  let result = data.reduce((acc: bigint, obj) => {
-    return acc + BigInt(obj.books) * BigInt(obj.avgPagesPerBook);
-  }, 0n);
+    let result = data.reduce((acc: bigint, obj) => {
+        return acc + BigInt(obj.books) * BigInt(obj.avgPagesPerBook);
+    }, 0n);
 
-  return result;
+    return result;
 }
 
 function createCustomerID(name: string, id: number): string {
-  return `${name}${id}`;
+    return `${name}${id}`;
 }
 
 function createCustomer(name: string, age?: number, city?: string): void {
-  console.log(`Creating customer ${name}`);
+    console.log(`Creating customer ${name}`);
 
-  if (age) {
-    console.log(`Age: ${age}`);
-  }
+    if (age) {
+        console.log(`Age: ${age}`);
+    }
 
-  if (city) {
-    console.log(`City: ${city}`);
-  }
+    if (city) {
+        console.log(`City: ${city}`);
+    }
 }
 
 function getBookByID(id: number): any {
-  const books = getAllBooks();
-  return books.find(book => book.id === id);
+    const books = getAllBooks();
+    return books.find(book => book.id === id);
 }
 
-
 function сheckoutBooks(customer: string, ...bookIDs: number[]): string[] {
-  console.log(`Checking out books for ${customer}`);
+    console.log(`Checking out books for ${customer}`);
 
-  let booksCheckedOut: string[] = [];
+    let booksCheckedOut: string[] = [];
 
-  for (let id of bookIDs) {
-    let book = getBookByID(id);
-    if (book && book.available) {
-      booksCheckedOut.push(book.title);
+    for (let id of bookIDs) {
+        let book = getBookByID(id);
+        if (book && book.available) {
+            booksCheckedOut.push(book.title);
+        }
     }
-  }
 
-  return booksCheckedOut;
+    return booksCheckedOut;
 }
 
 function getTitles(author: string): string[];
 function getTitles(available: boolean): string[];
 function getTitles(id: number, available: boolean): string[];
 function getTitles(...args: any[]): string[] {
-  const books = getAllBooks();
-  if (args.length === 0) {
-    return [];
-  }
-  else if (args.length === 1) {
-    const arg = args[0];
+    const books = getAllBooks();
+    if (args.length === 0) {
+        return [];
+    } else if (args.length === 1) {
+        const arg = args[0];
 
-    if (typeof arg === 'string') {
-      return books.filter(book => book.author === arg).map(book => book.title);
-    }
-    else if (typeof arg === 'boolean') {
-      return books.filter(book => book.available === arg).map(book => book.title);
-    }
-  }
-  else if (args.length === 2) {
-    const id = args[0];
-    const available = args[1];
+        if (typeof arg === 'string') {
+            return books.filter(book => book.author === arg).map(book => book.title);
+        } else if (typeof arg === 'boolean') {
+            return books.filter(book => book.available === arg).map(book => book.title);
+        }
+    } else if (args.length === 2) {
+        const id = args[0];
+        const available = args[1];
 
-    if (typeof id === 'number' && available === 'boolean') {
-      return books.filter(book => book.id === id && book.available === available).map(book => book.title);
+        if (typeof id === 'number' && available === 'boolean') {
+            return books.filter(book => book.id === id && book.available === available).map(book => book.title);
+        }
     }
-  }
 }
 
 function printBook(book: Book): void {
-  console.log(`${book.title} by ${book.author}`);
+    console.log(`${book.title} by ${book.author}`);
 }
 
 function assertStringValue(val: any): asserts val is string {
-  if (typeof val !== 'string') {
-    throw new Error('value should have been a string.');
-  }
+    if (typeof val !== 'string') {
+        throw new Error('value should have been a string.');
+    }
 }
 
 function bookTitleTransform(title: any) {
-  assertStringValue(title);
+    assertStringValue(title);
 
-  return [...title].reverse().join('');
+    return [...title].reverse().join('');
 }
-
 
 // ---------------------------------------------
 // Task 02.01
