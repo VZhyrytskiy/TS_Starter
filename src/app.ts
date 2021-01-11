@@ -405,14 +405,12 @@ class UniversityLibrarian implements Librarian {
 
 // Task 05.05
 const personBook: PersonBook = {
-  name: 'Anna',
-  email: 'anna@example.com',
-  author: 'Boris',
-  available: true,
-  category: Category.HTML,
-  id: 1,
-  title: 'Introduction to HTML'
+    name: 'Anna',
+    email: 'anna@example.com',
+    author: 'Boris',
+    available: true,
+    category: Category.HTML,
+    id: 1,
+    title: 'Introduction to HTML',
 };
 console.log(personBook);
-
-
