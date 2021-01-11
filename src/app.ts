@@ -1,6 +1,7 @@
+/* eslint-disable no-redeclare */
 function showHello(divName: string, name: string) {
-  const elt = document.getElementById(divName);
-  elt.innerText = `Hello from ${name}`;
+    const elt = document.getElementById(divName);
+    elt.innerText = `Hello from ${name}`;
 }
 
 showHello('greeting', 'TypeScript');
@@ -8,7 +9,25 @@ showHello('greeting', 'TypeScript');
 import { Category } from './enums';
 import { Book, Logger, Author, Librarian, Magazine } from './interfaces';
 import { UniversityLibrarian, ReferenceItem, RefBook, Shelf } from './classes';
-import { assertStringValue, getAllBooks, bookTitleTransform, createCustomer, createCustomerID, getBookAuthorByIndex, getBookByID, getBookProp, getBookTitlesByCategory, getTitles, logBookTitles, logFirstAvailable, printBook, сheckoutBooks, purge, getBooksByCategory, logCategorySearch } from './functions';
+import {
+    assertStringValue,
+    getAllBooks,
+    bookTitleTransform,
+    createCustomer,
+    createCustomerID,
+    getBookAuthorByIndex,
+    getBookByID,
+    getBookProp,
+    getBookTitlesByCategory,
+    getTitles,
+    logBookTitles,
+    logFirstAvailable,
+    printBook,
+    сheckoutBooks,
+    purge,
+    getBooksByCategory,
+    logCategorySearch,
+} from './functions';
 import { BookRequiredFields, createCustomerFunctionType, UpdatedBook } from './types';
 import Encyclopedia from './classes/encyclopedia';
 
@@ -162,7 +181,7 @@ import type { Library } from './classes';
 const lib: Library = {
     id: 1,
     name: 'Vernadsky National Library of Ukraine',
-    address: 'Kyiv,  Holosiivskyi Avenue, 3'
+    address: 'Kyiv,  Holosiivskyi Avenue, 3',
 };
 console.log(lib);
 
@@ -241,7 +260,6 @@ console.log(lib);
 //   id: 1,
 //   title: 'Refactoring JavaScript'
 // };
-
 
 // const params: Parameters<createCustomerFunctionType> = ['Anna'];
 // createCustomer(...params);
