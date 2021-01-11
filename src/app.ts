@@ -17,7 +17,7 @@ import {
     createCustomerID,
     getBookAuthorByIndex,
     getBookByID,
-    getBookProp,
+    getProperty,
     getBookTitlesByCategory,
     getTitles,
     logBookTitles,
