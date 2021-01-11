@@ -2,11 +2,12 @@ import { Book } from './interfaces';
 import { BookProperties, BookOrUndefined } from './types';
 import { Category } from './enums';
 
-export function getBookProp(book: Book, prop: BookProperties): any {
-    if (typeof book[prop] === 'function') {
-        return (book[prop] as Function).name;
+export function getProperty<TObject, TKey extends keyof TObject>(
+    obj: TObject, prop: TKey): TObject[TKey] {
+    if (typeof obj[prop] === 'function') {
+        return obj[prop]['name'];
     }
-    return book[prop];
+    return obj[prop];
 }
 
 export function getAllBooks(): readonly Book[] {
