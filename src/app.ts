@@ -293,3 +293,6 @@ const offer: any = {
 };
 
 console.log(offer?.magazine);
+console.log(offer?.magazine?.getTitle());
+console.log(offer?.book?.getTitle?.());
+console.log(offer.book.authors?.[0]);
