@@ -17,7 +17,7 @@ import {
     createCustomerID,
     getBookAuthorByIndex,
     getBookByID,
-    getBookProp,
+    getProperty,
     getBookTitlesByCategory,
     getTitles,
     logBookTitles,
@@ -120,11 +120,14 @@ import { BookRequiredFields, createCustomerFunctionType, UpdatedBook } from './t
 // };
 
 // console.log(offer?.magazine);
+// console.log(offer?.magazine?.getTitle());
+// console.log(offer?.book?.getTitle?.());
+// console.log(offer.book.authors?.[0]);
 
 // Task 04.05
-// console.log(getBookProp(getAllBooks()[0], 'title'));        // Refactoring JavaScript
-// console.log(getBookProp(getAllBooks()[0], 'markDamaged'));  // undefined
-// console.log(getBookProp(getAllBooks()[0], 'isbn'));      // error
+// console.log(getProperty(getAllBooks()[0], 'title'));        // Refactoring JavaScript
+// console.log(getProperty(getAllBooks()[0], 'markDamaged'));  // undefined
+// console.log(getProperty(getAllBooks()[0], 'isbn'));      // error
 
 // Task 05.01
 // let ref: ReferenceItem = new ReferenceItem(1, 'Updated Facts and Figures', 2016);
@@ -161,8 +164,8 @@ import { BookRequiredFields, createCustomerFunctionType, UpdatedBook } from './t
 
 // Task 06.03
 // let refBook: ReferenceItem = new Encyclopedia('WorldPedia', 1900, 10);
-let refBook: ReferenceItem = new RefBook(1, 'WorldPedia', 1900, 10);
-refBook.printItem();
+// let refBook: ReferenceItem = new RefBook(1, 'WorldPedia', 1900, 10);
+// refBook.printItem();
 
 // Task 06.05
 // import('./classes').then(module => {
@@ -173,14 +176,14 @@ refBook.printItem();
 // });
 
 // Task 06.06
-import type { Library } from './classes';
-// const lib: Library = new Library();
-const lib: Library = {
-    id: 1,
-    name: 'Vernadsky National Library of Ukraine',
-    address: 'Kyiv,  Holosiivskyi Avenue, 3',
-};
-console.log(lib);
+// import type { Library } from './classes';
+// // const lib: Library = new Library();
+// const lib: Library = {
+//     id: 1,
+//     name: 'Vernadsky National Library of Ukraine',
+//     address: 'Kyiv,  Holosiivskyi Avenue, 3',
+// };
+// console.log(lib);
 
 // Task 07.01
 // let inventory: Array<Book> = [
@@ -241,6 +244,8 @@ console.log(lib);
 // magazineShelf.printTitles();
 // let softwareBook = bookShelf.find('Code Complete');
 // console.log(`${softwareBook.title} (${softwareBook.author})`);
+
+// console.log(getProperty(getAllBooks()[0], 'title'));
 
 // Task 07.04
 // const book: BookRequiredFields = {
