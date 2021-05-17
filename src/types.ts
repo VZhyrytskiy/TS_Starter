@@ -1,3 +1,4 @@
+import { getBooksByCategoryPromise } from './functions';
 import { Book, Person, Author } from './interfaces';
 
 export type BookProperties = keyof Book;
@@ -15,5 +16,10 @@ type Param3<T> = T extends (a: string, b: number, c: infer R) => symbol ? R : ne
 export type P1 = Param1<fn>; 
 export type P2 = Param2<fn>; 
 export type P3 = Param3<fn>; 
+
+type Unpromisify<T> = T extends Promise<infer R> ? R : never;
+type fn = ReturnType<typeof getBooksByCategoryPromise>;
+export type PromiseValueType = Unpromisify<fn>;
+
 
 
