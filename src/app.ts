@@ -166,9 +166,12 @@ let refBook: ReferenceItem = new RefBook(1, 'WorldPedia', 1900, 10);
 refBook.printItem();
 
 // Task 06.05
-import('./classes').then(module => {
+const flag = true;
+if (flag) {
+    const module = await import('./classes');
+
     const reader = new module.Reader();
     console.log(reader);
     reader.name = 'Anna';
     reader.take(getAllBooks()[1]);
-});
+}
