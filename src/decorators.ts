@@ -49,9 +49,12 @@ export function timeout(milliseconds: number = 0) {
     const originalMethod = descriptor.value;
 
     descriptor.value = function(...args: any) {
-      setTimeout(() => {
-        originalMethod.apply(this, args);
-      }, milliseconds);
+      
+      if (window.confirm('Are you sure?')) {
+        setTimeout(() => {
+          originalMethod.apply(this, args);
+        }, milliseconds);
+      }
     };
 
     return descriptor;
