@@ -8,7 +8,7 @@ showHello('greeting', 'TypeScript');
 
 import { Category } from './enums';
 import { Book, Logger, Author, Librarian, Magazine } from './interfaces';
-import { UniversityLibrarian, ReferenceItem, RefBook, Shelf } from './classes';
+import { UL, ReferenceItem, RefBook, Shelf } from './classes';
 import {
     assertStringValue,
     getAllBooks,
@@ -150,7 +150,7 @@ import Encyclopedia from './classes/encyclopedia';
 // refBook.printCitation();
 
 // Task 05.04
-// let favoriteLibrarian: Librarian = new UniversityLibrarian();
+// let favoriteLibrarian: Librarian = new UL.UniversityLibrarian();
 // favoriteLibrarian.name = 'Anna';
 // favoriteLibrarian.assistCustomer('Boris');
 
