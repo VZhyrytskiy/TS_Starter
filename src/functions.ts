@@ -1,6 +1,7 @@
 import { Book } from './interfaces';
 import { BookProperties, BookOrUndefined } from './types';
 import { Category } from './enums';
+import RefBook from './encyclopedia';
 
 export function getProperty(book: Book, prop: BookProperties): any {
     if (typeof book[prop] === 'function') {
@@ -176,3 +177,18 @@ export function bookTitleTransform(title: any) {
 
     return [...title].reverse().join('');
 }
+
+// Автор: Yevhen_Zakharevych@epam.com
+function assertRefBookInstance(condition: any): asserts condition {
+    if (!condition) {
+        throw new Error('It is not instance of RefBook');
+    }
+}
+
+export function printRefBook(data: any): void {
+    assertRefBookInstance(data instanceof RefBook);
+    data.printItem();
+}
+	
+
+	
