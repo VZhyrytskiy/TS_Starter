@@ -88,7 +88,8 @@ export function getBookByID(id: number): BookOrUndefined {
 export function getBookAuthorByIndex(index: number): [string, string] {
     const books = getAllBooks();
     const { title, author } = books[index];
-    return [title, author];
+    const result: [title: string, author: string] = [title, author];
+    return result;
 }
 
 // export function calcTotalPages(): BigInt {
