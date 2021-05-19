@@ -302,6 +302,6 @@ import Encyclopedia from './classes/encyclopedia';
 // enc.printItem();
 
 // Task 08.05
-const librarian = new UniversityLibrarian();
+const librarian = new UL.UniversityLibrarian();
 librarian.name = 'Ann';
 librarian.assistCustomer('Boris');
