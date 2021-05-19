@@ -274,4 +274,4 @@ import { BookRequiredFields, createCustomerFunctionType, UpdatedBook } from './t
 // createCustomer(...params);
 
 // Task 08.01
-let favoriteLibrarian: any = new UniversityLibrarian();
+let favoriteLibrarian: any = new UL.UniversityLibrarian();
