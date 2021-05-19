@@ -1,7 +1,7 @@
 import { Book } from './interfaces';
 import { BookProperties, BookOrUndefined } from './types';
 import { Category } from './enums';
-import RefBook from './encyclopedia';
+import { RefBook } from './classes';
 
 export function getProperty<TObject, TKey extends keyof TObject>(
     obj: TObject, prop: TKey): TObject[TKey] | string {
