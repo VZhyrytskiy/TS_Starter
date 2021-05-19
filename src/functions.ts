@@ -1,6 +1,7 @@
 import { Book, LibMgrCallback } from './interfaces';
 import { BookProperties, BookOrUndefined } from './types';
 import { Category } from './enums';
+import { RefBook } from './classes';
 
 export function getProperty<TObject, TKey extends keyof TObject>(obj: TObject, prop: TKey): TObject[TKey] | string {
     if (typeof obj[prop] === 'function') {
@@ -180,52 +181,16 @@ export function bookTitleTransform(title: any) {
 export function purge<T>(inventory: Array<T>): Array<T> {
     return inventory.slice(2);
 }
+// Автор: Yevhen_Zakharevych@epam.com
+function assertRefBookInstance(condition: any): asserts condition {
+    if (!condition) {
+        throw new Error('It is not instance of RefBook');
+    }
+}
 
-export function makeProperty<T>(
-    prototype: any,
-    propertyName: string,
-    getTransformer: (value: any) => T,
-    setTransformer: (value: any) => T,
-) {
-    // меп для хранения данных для каждого экземпляра
-    const values = new Map<any, T>();
-
-    // на прототипе определяем setter
-    // этот сетер запуститься,
-    // когда первый раз будем устанавливать значение свойства экземпляра,
-    // так как на экземпляре не будет сетера для свойства,
-    // то будет использоваться сетер из прототипа
-    Object.defineProperty(prototype, propertyName, {
-        set(firstValue: any) {
-            // внутри сетера есть доступ к this - это и будет экземпляр класса
-            // на экземпляре определяем getter & setter для сойства
-            Object.defineProperty(this, propertyName, {
-                // getter берет значение из мепа для текущего экземпляра
-                get() {
-                    if (getTransformer) {
-                        return getTransformer(values.get(this));
-                    } else {
-                        values.get(this);
-                    }
-                },
-                // setter записывает значение для текущего экземпляра в меп,
-                // при этом вызывает еще функцию преобразования значения
-                set(value: any) {
-                    if (setTransformer) {
-                        values.set(this, setTransformer(value));
-                    } else {
-                        values.set(this, value);
-                    }
-                },
-                // устанавливаем, что свойство перечисляемое
-                enumerable: true,
-            });
-            // Установка итогового значения на экземпляре
-            this[propertyName] = firstValue;
-        },
-        enumerable: true,
-        configurable: true,
-    });
+export function printRefBook(data: any): void {
+    assertRefBookInstance(data instanceof RefBook);
+    data.printItem();
 }
 
 export function getBooksByCategory(category: Category, callback: LibMgrCallback): void {
