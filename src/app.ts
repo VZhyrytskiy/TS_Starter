@@ -24,6 +24,7 @@ import {
     logFirstAvailable,
     printBook,
     сheckoutBooks,
+    printRefBook,
 } from './functions';
 
 // ---------------------------------------------
@@ -162,8 +163,11 @@ import {
 
 // Task 06.03
 // let refBook: ReferenceItem = new Encyclopedia('WorldPedia', 1900, 10);
-let refBook: ReferenceItem = new RefBook(1, 'WorldPedia', 1900, 10);
-refBook.printItem();
+// let refBook: ReferenceItem = new RefBook(1, 'WorldPedia', 1900, 10);
+// refBook.printItem();
+// printRefBook(refBook);
+// const obj: UL.UniversityLibrarian = new UL.UniversityLibrarian();
+// printRefBook(obj); // -- error
 
 // Task 06.05
 // const flag = true;
