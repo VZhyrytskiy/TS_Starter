@@ -87,7 +87,8 @@ function logBookTitles(titles: string[]): void {
 function getBookAuthorByIndex(index: number): [string, string] {
     const books = getAllBooks();
     const { title, author } = books[index];
-    return [title, author];
+    const result: [title: string, author: string] = [title, author];
+    return result;
 }
 
 function calcTotalPages(): bigint {
