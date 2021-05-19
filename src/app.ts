@@ -275,17 +275,17 @@ import Encyclopedia from './classes/encyclopedia';
 // createCustomer(...params);
 
 // Task 08.01
-// let favoriteLibrarian: any = new UniversityLibrarian();
+// let favoriteLibrarian: any = new UL.UniversityLibrarian();
 
 // Task 08.02
-// let fLibrarian = new UniversityLibrarian();
+// let fLibrarian = new UL.UniversityLibrarian();
 // fLibrarian.name = 'Anna';
 // fLibrarian.assistCustomer('Boris');
 // fLibrarian['printLibrarian']();
 // console.log(fLibrarian);
 
 // Task 08.03
-// let lib = new UniversityLibrarian();
+// let lib = new UL.UniversityLibrarian();
 
 // try {
 //   lib.assistFaculty = () => console.log('assistFaculty replacement method');
@@ -302,7 +302,7 @@ import Encyclopedia from './classes/encyclopedia';
 // enc.printItem();
 
 // Task 08.05
-// const librarian = new UniversityLibrarian();
+// const librarian = new UL.UniversityLibrarian();
 // librarian.name = 'Ann';
 // librarian.assistCustomer('Boris');
 
