@@ -167,6 +167,6 @@ let refBook: ReferenceItem = new RefBook(1, 'WorldPedia', 1900, 10);
 refBook.printItem();
 
 printRefBook(refBook);
-const obj: UniversityLibrarian = new UniversityLibrarian();
+const obj: UL.UniversityLibrarian = new UL.UniversityLibrarian();
 printRefBook(obj); // -- error
 
