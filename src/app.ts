@@ -25,6 +25,7 @@ import {
     printBook,
     сheckoutBooks,
     purge,
+    printRefBook,
 } from './functions';
 import { BookRequiredFields, createCustomerFunctionType, UpdatedBook } from './types';
 import Encyclopedia from './classes/encyclopedia';
@@ -167,6 +168,9 @@ import Encyclopedia from './classes/encyclopedia';
 // let refBook: ReferenceItem = new Encyclopedia('WorldPedia', 1900, 10);
 // let refBook: ReferenceItem = new RefBook(1, 'WorldPedia', 1900, 10);
 // refBook.printItem();
+// printRefBook(refBook);
+// const obj: UL.UniversityLibrarian = new UL.UniversityLibrarian();
+// printRefBook(obj); // -- error
 
 // Task 06.05
 // const flag = true;
@@ -303,7 +307,7 @@ import Encyclopedia from './classes/encyclopedia';
 // librarian.assistCustomer('Boris');
 
 // Task 08.06
-const l = new UniversityLibrarian();
+const l = new UL.UniversityLibrarian();
 l.name = 'Ann';
 console.log(l);
 console.log(l.name);
